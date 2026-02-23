@@ -173,7 +173,13 @@ end
 function M.telescope(builtin)
 	-- FILES
 	set("n", "<leader>fP", builtin.find_files, "find files");
-	set("n", "<leader>fp", builtin.git_files, "find files in git repo");
+	set("n", "<leader>fp", function()
+		local ok = pcall(builtin.git_files);
+		if not ok then
+			require("wasabi.util").notify("Not in a git repo", vim.log.levels.INFO);
+			builtin.find_files();
+		end
+	end, "find files in git repo");
 
 	set("n", "<leader>fd", builtin.diagnostics, "Find diagnostics");
 
