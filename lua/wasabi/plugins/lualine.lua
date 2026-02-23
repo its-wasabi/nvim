@@ -72,7 +72,7 @@ require("lualine").setup({
 
 			{
 				"filename",
-				path = 4,
+				path = 3,
 				newfile_status = true,
 				file_status = true,
 				symbols = {
