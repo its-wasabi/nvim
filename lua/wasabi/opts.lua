@@ -131,7 +131,7 @@ end)
 
 -- Draws a vertical guideline
 -- Accepts comma-separated list: "80,100"
-vim.opt.colorcolumn = "80,100";
+vim.opt.colorcolumn = "100,120";
 -- Enables .editorconfig support
 -- Editorconfig can override tab/indent options per project
 vim.g.editorconfig = true;
