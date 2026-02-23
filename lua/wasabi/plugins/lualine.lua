@@ -135,13 +135,19 @@ require("lualine").setup({
 			function()
 				local d = vim.diagnostic.is_enabled({ bufnr = 0 });
 				local h = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 });
+				local l = vim.lsp.codelens.is_enabled({ bufnr = 0 });
 
-				local bg = vim.api.nvim_get_hl(0, { name = "lualine_b_normal", link = false }).bg
-				local d_fg = vim.api.nvim_get_hl(0, { name = d and "True" or "False", link = false }).fg
-				local h_fg = vim.api.nvim_get_hl(0, { name = h and "True" or "False", link = false }).fg
-				vim.api.nvim_set_hl(0, "StatusD", { fg = d_fg, bg = bg })
-				vim.api.nvim_set_hl(0, "StatusH", { fg = h_fg, bg = bg })
-				return "[%#StatusD#D%#lualine_b_normal#|%#StatusH#H%#lualine_b_normal#]"
+				local bg = vim.api.nvim_get_hl(0, { name = "lualine_b_normal", link = false }).bg;
+
+				local d_fg = vim.api.nvim_get_hl(0, { name = d and "True" or "False", link = false }).fg;
+				local h_fg = vim.api.nvim_get_hl(0, { name = h and "True" or "False", link = false }).fg;
+				local l_fg = vim.api.nvim_get_hl(0, { name = l and "True" or "False", link = false }).fg;
+
+				vim.api.nvim_set_hl(0, "StatusD", { fg = d_fg, bg = bg });
+				vim.api.nvim_set_hl(0, "StatusH", { fg = h_fg, bg = bg });
+				vim.api.nvim_set_hl(0, "StatusL", { fg = l_fg, bg = bg });
+
+				return "[%#StatusD#D%#lualine_b_normal#|%#StatusH#H%#lualine_b_normal#|%#StatusL#L%#lualine_b_normal#]"
 			end,
 		},
 		lualine_z = {

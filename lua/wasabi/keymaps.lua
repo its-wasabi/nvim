@@ -263,14 +263,18 @@ function M.lsp_attach(bufnr)
 	end
 
 	-- TOGGLE DIAGNOSTICS
-	buf_set("n", "<leader>td", function()
+	buf_set("n", "td", function()
 		vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
 	end, "toggle diagnostics");
 	-- TOGGLE INLAY HINTS (0.10+)
-	buf_set("n", "<leader>th", function()
+	buf_set("n", "th", function()
 		local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 		vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
 	end, "toggle inlay hints")
+	-- TOGGLE CODELENS
+	buf_set("n", "tl", function()
+		vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = bufnr }));
+	end, "toggle codelens")
 
 	-- DOCUMENTATION
 	buf_set("n", "K", vim.lsp.buf.hover, "show hover documentation")

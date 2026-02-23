@@ -19,12 +19,7 @@ return function(client, bufnr)
 
 	-- CodeLens
 	if client.server_capabilities.codeLensProvider then
-		local codelens_group = vim.api.nvim_create_augroup("LspCodeLens_" .. bufnr, { clear = true })
-		vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-			group = codelens_group,
-			buffer = bufnr,
-			callback = function() vim.lsp.codelens.refresh({ bufnr = bufnr }) end,
-		})
+		vim.lsp.codelens.enable();
 	end
 
 	-- Document highlight (0.12+)
