@@ -2,24 +2,15 @@
 if vim.env.TERM == "xterm-kitty" then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		callback = function()
-			vim.fn.system({
-				"kitty",
-				"@",
-				"set-spacing",
-				"padding=0",
-			})
+			vim.fn.system({ "kitty", "@", "load-config", "-o", "font_family=FiraCode" });
+			vim.fn.system({ "kitty", "@", "set-spacing", "padding=0", });
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("VimLeavePre", {
 		callback = function()
-			vim.fn.system({
-				"kitty",
-				"@",
-				"set-spacing",
-				"padding=default",
-				"margin=default",
-			})
+			vim.fn.system({ "kitty", "@", "set-spacing", "padding=default", "margin=default", });
+			vim.fn.system({ "kitty", "@", "load-config", "--ignore-overrides" });
 		end,
 	})
 end
@@ -79,6 +70,7 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/b0o/schemastore.nvim" },
 	-- Completion
+
 	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
 	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
 	{ src = "https://github.com/Kaiser-Yang/blink-cmp-git.git" },
