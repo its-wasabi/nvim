@@ -19,7 +19,7 @@ return function(client, bufnr)
 
 	-- CodeLens
 	if client.server_capabilities.codeLensProvider then
-		vim.lsp.codelens.enable();
+		-- vim.lsp.codelens.enable(); -- NOTE: disable that by default
 	end
 
 	-- Document highlight (0.12+)

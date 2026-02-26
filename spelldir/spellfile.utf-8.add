@@ -172,3 +172,9 @@ Mutex
 struct
 mut
 u32
+str2
+str1
+#endable
+impl's
+#mpl/!
+#mpl/!
