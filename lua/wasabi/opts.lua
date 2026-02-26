@@ -23,15 +23,15 @@ vim.opt.number = true;
 -- Show relative line numbers on all other lines
 vim.opt.relativenumber = true;
 -- Column used to display signs (diagnostics, git, breakpoints)
--- Values:
---	"number" - overlays them on the line number column to save space
---	"yes" - TODO:
---	"no" - TODO:
---	"auto" - TODO:
+-- Where to render diagnostic/git/breakpoint signs:
+--   "number"  - overlap with the line number column (saves space)
+--   "yes"     - always show a dedicated sign column
+--   "no"      - never show signs
+--   "auto"    - show only when there are active signs
 vim.opt.signcolumn = "number";
 -- Height of the command line
 vim.opt.cmdheight = 0;
--- Statusline behaviour with multiple buffers
+-- Statusline behavior with multiple buffers
 -- Values:
 --	0 - never
 --	1 - only with splits
@@ -119,12 +119,11 @@ vim.opt.ignorecase = true;
 vim.opt.smartcase = true;
 -- Show search results while typing
 vim.opt.incsearch = true;
--- Disables persistent search highlighting
+-- Enables persistent search highlighting
 vim.opt.hlsearch = true;
 
--- Clipboard integration with system clipboard
--- TODO: Check the startup time difference
--- PERF: Schedule to reduce startup time
+-- Use the system clipboard for all yank/paste operations
+-- Scheduled to defer the clipboard provider check and reduce startup time
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus";
 end)
@@ -143,8 +142,6 @@ vim.g.netrw_banner = 0;
 vim.g.netrw_liststyle = 3;
 -- netrw window size as a percentage of the screen width
 vim.g.netrw_winsize = 8;
--- Sorting method: "name", "time", "size", "ext"
-vim.g.netrw_sort_by = "name";
 -- Shell command used to copy directories
 vim.g.netrw_localcopydircmd = "cp -r";
 -- Shell command used to remove directories
@@ -152,13 +149,14 @@ vim.g.netrw_localrmdir = "rm -ri";
 -- Directory browsing cache behavior
 -- 0 = no cache, 1 = moderate caching, 2 = aggressive caching
 vim.g.netrw_fastbrowse = 1;
--- TODO:
+-- Open vertical splits to the right when pressing 'v' in netrw (mirrors split right)
 vim.g.netrw_altv = 1;
 
--- TODO:
+-- Completion menu behavior:
+--   "menu"     - show a popup menu even for a single match
+--   "menuone"  - show the menu even when there's only one option
+--   "noselect" - don't auto-select the first item (lets your completion plugin drive)
 vim.opt.completeopt = { "menu", "menuone", "noselect" };
--- Popup menu height
-vim.opt.pumheight = 10;
 
 -- Time in milliseconds before CursorHold events and diagnostics update
 vim.opt.updatetime = 20;
@@ -173,7 +171,7 @@ vim.diagnostic.config({
 		source = "if_many",
 		spacing = 2,
 		format = function(diag)
-			return diag.message:gsub("%.$", ""); -- remove trailing `.` from lua_ls
+			return (diag.message:gsub("%.$", "")); -- remove trailing `.` from lua_ls
 		end,
 		prefix = "",
 		suffix = function(diag)
@@ -285,13 +283,14 @@ if vim.g.neovide then
 	vim.g.neovide_input_ime = false;
 end
 
--- Delays redraws during macros and scripts
-vim.opt.lazyredraw = false;
-
 -- vim.opt.smoothscroll = true;
 
 
--- TODO: Check what that is
+-- ShaDa (Shared Data) file — persists history across sessions.
+-- Format: 'N = remember N marks per file, <N = save up to N lines per register,
+--          sN = skip registers larger than N KB, :N = save N lines of cmdline history,
+--          /N = save N lines of search history, @N = save N lines of input history,
+--          h  = don't restore hlsearch state on startup
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h";
 
 -- Remove the legacy features
