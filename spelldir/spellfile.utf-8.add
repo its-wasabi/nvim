@@ -169,3 +169,6 @@ HostName
 debian
 #arget
 Mutex
+struct
+mut
+u32
