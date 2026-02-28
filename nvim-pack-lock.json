@@ -13,7 +13,7 @@
       "src": "https://github.com/bydlw98/blink-cmp-env.git"
     },
     "blink-cmp-git": {
-      "rev": "e3ad0ffaaa3b3b7e2158cc72cd6dad2d19842c46",
+      "rev": "10783593af764424018a95e75df6ad5a8b66fe07",
       "src": "https://github.com/Kaiser-Yang/blink-cmp-git.git"
     },
     "blink-cmp-latex": {
@@ -26,7 +26,7 @@
       "version": "1.8.0 - 1.8.0"
     },
     "embed.nvim": {
-      "rev": "ee30d4906053953e8e39bcdce9c6358c81ef6edf",
+      "rev": "9b7c161632d080381bce187e7661c58bd3f8ad15",
       "src": "https://github.com/Fasamii/embed.nvim"
     },
     "gitsigns.nvim": {
@@ -42,7 +42,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "21c2a84ce368e99b18f52ab348c4c02c32c02fcf",
+      "rev": "a324581a3c83fdacdb9804b79de1cbe00ce18550",
       "src": "https://github.com/williamboman/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -51,7 +51,7 @@
     },
     "mdmath.nvim": {
       "rev": "699acb27fd34bfdf92a43ce0abdd17f0c7a948fe",
-      "src": "https://github.com/Thiago4532/mdmath.nvim.git"
+      "src": "https://github.com/Thiago4532/mdmath.nvim"
     },
     "netrw-icons.nvim": {
       "rev": "85c6d741d0aa27a4cc419b5af04e0f8b1bc881d5",
@@ -62,7 +62,7 @@
       "src": "https://github.com/nacro90/numb.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "44acfe887d4056f704ccc4f17513ed41c9e2b2e6",
+      "rev": "ead0f5f342d8d323441e7d4b88f0fc436a81ad5f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tetris": {
@@ -70,7 +70,7 @@
       "src": "https://github.com/alec-gibson/nvim-tetris.git"
     },
     "nvim-treesitter": {
-      "rev": "3edb01f912867603c2aef9079f208f0244c0885b",
+      "rev": "6bc51d020a5e06b7e20ea82dbc47196d3d3027c7",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-textobjects": {
@@ -78,7 +78,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git"
     },
     "nvim-web-devicons": {
-      "rev": "746ffbb17975ebd6c40142362eee1b0249969c5c",
+      "rev": "737cf6c657898d0c697311d79d361288a1343d50",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -86,19 +86,19 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "48b4175dbca8439d30c1f52231cbe5a712c8f9d9",
+      "rev": "1c958131c083c8557ea499fdb08c88b8afb05c4e",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "schemastore.nvim": {
-      "rev": "55ca969ceed5209d62cbf4c20cef023ff188b6c5",
+      "rev": "7e88652d0291bfd4c988737c176fa59e187904f2",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sniprun": {
-      "rev": "c091976ec5dbb0c6587f621657892174fe3dd691",
+      "rev": "973acfe83cff35d13b95369a5606c47565b824fb",
       "src": "https://github.com/michaelb/sniprun.git"
     },
     "sobsob.nvim": {
-      "rev": "67321ee8e2bdb8e876e63c905bb337952cac3f47",
+      "rev": "6cd47ddc2a122faf86d676b8ff8754ff30c135d1",
       "src": "https://github.com/Fasamii/sobsob.nvim"
     },
     "telescope.nvim": {

@@ -33,6 +33,7 @@ local parsers = {
 	"rust",
 	"go",
 
+	"nix",
 	"json",
 	"yaml",
 	"toml",

@@ -187,3 +187,10 @@ RGB
 Statusline
 ShaDa
 #plitright
+AcqRel
+SeqCst
+os
+rustc
+eq
+Json
+Deref

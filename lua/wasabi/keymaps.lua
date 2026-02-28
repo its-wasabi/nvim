@@ -33,25 +33,51 @@ set("n", "<leader>rb", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 
 -- SPLITS
 
-set("n", "<leader>sv", "<C-w>s", "split vertically");
-set("n", "<leader>sp", "<C-w>v", "split horizontally");
-set("n", "<leader>sd", "<cmd>close<CR>", "close current split");
+set({ "n", "t" }, "<leader>sv", "<C-w>s", "split vertically");
+set({ "n", "t" }, "<leader>sp", "<C-w>v", "split horizontally");
+set({ "n", "t" }, "<leader>sd", "<cmd>close<CR>", "close current split");
+
 set("n", "<leader>sh", "<C-w>h", "focus left split");
 set("n", "<leader>sj", "<C-w>j", "focus bottom split");
 set("n", "<leader>sk", "<C-w>k", "focus upper split");
 set("n", "<leader>sl", "<C-w>l", "focus right split");
-set("n", "<leader>srh", "<C-w>>", "resize split window (left)");
-set("n", "<leader>srl", "<C-w><", "resize split window (right)");
-set("n", "<leader>srk", "<C-w>+", "resize split window (up)");
-set("n", "<leader>srj", "<C-w>-", "resize split window (down)");
-set("n", "<leader>sr=", "<C-w>=", "resize split window (left)");
+
+set("t", "<leader>sh", "<C-\\><C-n><C-w>h", "focus left split");
+set("t", "<leader>sj", "<C-\\><C-n><C-w>j", "focus bottom split");
+set("t", "<leader>sk", "<C-\\><C-n><C-w>k", "focus upper split");
+set("t", "<leader>sl", "<C-\\><C-n><C-w>l", "focus right split");
+
+set("n", "<leader>srh", "<C-w>>", "resize right");
+set("n", "<leader>srl", "<C-w><", "resize left");
+set("n", "<leader>srk", "<C-w>+", "resize up");
+set("n", "<leader>srj", "<C-w>-", "resize down");
+set("n", "<leader>sr=", "<C-w>=", "equalize splits");
+
+set("t", "<leader>srh", "<C-\\><C-n><C-w>>", "resize right");
+set("t", "<leader>srl", "<C-\\><C-n><C-w><", "resize left");
+set("t", "<leader>srk", "<C-\\><C-n><C-w>+", "resize up");
+set("t", "<leader>srj", "<C-\\><C-n><C-w>-", "resize down");
+set("t", "<leader>sr=", "<C-\\><C-n><C-w>=", "equalize splits");
 
 -- TABS
 
-set("n", "<leader>wn", "<cmd>tabnew<CR>", "create new tab");
-set("n", "<leader>wd", "<cmd>tabclose<CR>", "close current tab");
-set("n", "<leader>wh", "<cmd>tabp<CR>", "focus previous tab");
-set("n", "<leader>wl", "<cmd>tabn<CR>", "focus next tab");
+set({ "n", "t" }, "<leader>tn", "<cmd>tabnew<CR>", "new tab")
+set({ "n", "t" }, "<leader>td", "<cmd>tabclose<CR>", "close tab")
+
+set("n", "<leader>tl", "<cmd>tabnext<CR>", "next tab")
+set("n", "<leader>th", "<cmd>tabprev<CR>", "prev tab")
+set("t", "<leader>tl", "<C-\\><C-n><cmd>tabnext<CR>", "next tab")
+set("t", "<leader>th", "<C-\\><C-n><cmd>tabprev<CR>", "prev tab")
+
+set("n", "<leader>tmh", "<cmd>tabmove -1<CR>", "move tab left")
+set("n", "<leader>tml", "<cmd>tabmove +1<CR>", "move tab right")
+set("t", "<leader>tmh", "<C-\\><C-n><cmd>tabmove -1<CR>", "move tab left")
+set("t", "<leader>tml", "<C-\\><C-n><cmd>tabmove +1<CR>", "move tab right")
+
+for i = 1, 9 do
+	set("n", "<leader>t" .. i, "<cmd>tabn " .. i .. "<CR>", "go to tab " .. i)
+	set("t", "<leader>t" .. i, "<C-\\><C-n><cmd>tabn " .. i .. "<CR>", "go to tab " .. i)
+end
 
 -- FILE EXPLORER
 
@@ -209,50 +235,50 @@ end
 
 -- TODO: Review that keymaps
 function M.todo_comments()
-	set("n", "<leader>tl", "<cmd>TodoTelescope<cr>", "list all labels");
-	set("n", "<leader>tfl", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG,FIXIT,ISSUE,ERR<cr>", "list all FIXME labels");
-	set("n", "<leader>ttl", "<cmd>TodoTelescope keywords=TODO,LATER<cr>", "list all TODO labels");
-	set("n", "<leader>twl", "<cmd>TodoTelescope keywords=WARN,WARNING,XXX<cr>", "list all WARN labels");
-	set("n", "<leader>til", "<cmd>TodoTelescope keywords=NOTE,INFO<cr>", "list all NOTE labels");
-	set("n", "<leader>tol", "<cmd>TodoTelescope keywords=PERF,OPTIM,PERFORMANCE,OPTIMIZE<cr>", "list all PERF labels");
-	set("n", "<leader>tel", "<cmd>TodoTelescope keywords=TEST,TESTING,PASSED,FAILED<cr>", "list all TEST labels");
+	set("n", "<leader>ml", "<cmd>TodoTelescope<cr>", "list all labels");
+	set("n", "<leader>mfl", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG,FIXIT,ISSUE,ERR<cr>", "list all FIXME labels");
+	set("n", "<leader>mtl", "<cmd>TodoTelescope keywords=TODO,LATER<cr>", "list all TODO labels");
+	set("n", "<leader>mwl", "<cmd>TodoTelescope keywords=WARN,WARNING,XXX<cr>", "list all WARN labels");
+	set("n", "<leader>mil", "<cmd>TodoTelescope keywords=NOTE,INFO<cr>", "list all NOTE labels");
+	set("n", "<leader>mol", "<cmd>TodoTelescope keywords=PERF,OPTIM,PERFORMANCE,OPTIMIZE<cr>", "list all PERF labels");
+	set("n", "<leader>mel", "<cmd>TodoTelescope keywords=TEST,TESTING,PASSED,FAILED<cr>", "list all TEST labels");
 
-	set("n", "<leader>tn", function() require("todo-comments").jump_next() end, "Next label");
-	set("n", "<leader>tp", function() require("todo-comments").jump_prev() end, "Previous label");
+	set("n", "<leader>mn", function() require("todo-comments").jump_next() end, "Next label");
+	set("n", "<leader>mp", function() require("todo-comments").jump_prev() end, "Previous label");
 
-	set("n", "<leader>tfn",
+	set("n", "<leader>mfn",
 		function() require("todo-comments").jump_next({ keywords = { "FIX", "FIXME", "BUG", "FIXIT", "ISSUE", "ERR" } }) end,
 		"Next FIXME label");
-	set("n", "<leader>tfp",
+	set("n", "<leader>mfp",
 		function() require("todo-comments").jump_prev({ keywords = { "FIX", "FIXME", "BUG", "FIXIT", "ISSUE", "ERR" } }) end,
 		"Prev FIXME label");
 
-	set("n", "<leader>ttn", function() require("todo-comments").jump_next({ keywords = { "TODO", "LATER" } }) end,
+	set("n", "<leader>mtn", function() require("todo-comments").jump_next({ keywords = { "TODO", "LATER" } }) end,
 		"Next TODO label");
-	set("n", "<leader>ttp", function() require("todo-comments").jump_prev({ keywords = { "TODO", "LATER" } }) end,
+	set("n", "<leader>mtp", function() require("todo-comments").jump_prev({ keywords = { "TODO", "LATER" } }) end,
 		"Prev TODO label");
 
-	set("n", "<leader>twn",
+	set("n", "<leader>mwn",
 		function() require("todo-comments").jump_next({ keywords = { "WARN", "WARNING", "XXX" } }) end, "Next WARN label");
-	set("n", "<leader>twp",
+	set("n", "<leader>mwp",
 		function() require("todo-comments").jump_prev({ keywords = { "WARN", "WARNING", "XXX" } }) end, "Prev WARN label");
 
-	set("n", "<leader>tin", function() require("todo-comments").jump_next({ keywords = { "NOTE", "INFO" } }) end,
+	set("n", "<leader>min", function() require("todo-comments").jump_next({ keywords = { "NOTE", "INFO" } }) end,
 		"Next NOTE label");
-	set("n", "<leader>tip", function() require("todo-comments").jump_prev({ keywords = { "NOTE", "INFO" } }) end,
+	set("n", "<leader>mip", function() require("todo-comments").jump_prev({ keywords = { "NOTE", "INFO" } }) end,
 		"Prev NOTE label");
 
-	set("n", "<leader>ton",
+	set("n", "<leader>mon",
 		function() require("todo-comments").jump_next({ keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" } }) end,
 		"Next PERF label");
-	set("n", "<leader>top",
+	set("n", "<leader>mop",
 		function() require("todo-comments").jump_prev({ keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" } }) end,
 		"Prev PERF label");
 
-	set("n", "<leader>ten",
+	set("n", "<leader>men",
 		function() require("todo-comments").jump_next({ keywords = { "TEST", "TESTING", "PASSED", "FAILED" } }) end,
 		"Next TEST label");
-	set("n", "<leader>tep",
+	set("n", "<leader>mep",
 		function() require("todo-comments").jump_prev({ keywords = { "TEST", "TESTING", "PASSED", "FAILED" } }) end,
 		"Prev TEST label");
 end

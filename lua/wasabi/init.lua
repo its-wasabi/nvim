@@ -62,7 +62,7 @@ vim.pack.add({
 
 	-- Markdown
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-	{ src = "https://github.com/Thiago4532/mdmath.nvim.git" },
+	{ src = "https://github.com/Thiago4532/mdmath.nvim" },
 
 	-- LSP
 	{ src = "https://github.com/williamboman/mason.nvim" },
@@ -113,6 +113,7 @@ safe_require("wasabi.plugins.gitsigns");
 safe_require("wasabi.plugins.todo-comments");
 safe_require("wasabi.plugins.auto-session");
 safe_require("wasabi.plugins.markdown");
+safe_require("wasabi.plugins.mdmath");
 safe_require("wasabi.lsp");
 safe_require("wasabi.plugins.indent-blankline");
 safe_require("wasabi.plugins.sniprun");
