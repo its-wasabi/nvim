@@ -98,7 +98,7 @@
       "src": "https://github.com/michaelb/sniprun.git"
     },
     "sobsob.nvim": {
-      "rev": "6cd47ddc2a122faf86d676b8ff8754ff30c135d1",
+      "rev": "d8e3580204fd33f1d8fc957bee25c5f69a677e45",
       "src": "https://github.com/Fasamii/sobsob.nvim"
     },
     "telescope.nvim": {

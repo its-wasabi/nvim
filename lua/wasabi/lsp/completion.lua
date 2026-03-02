@@ -81,6 +81,7 @@ require("blink.cmp").setup({
 				opts = {
 					spellsuggest = true,
 					paths = {
+						"~/.config/nvim/spelldir/spellfile.utf-8.add",
 						"~/.config/nvim/google-10000-english/google-10000-english-usa.txt",
 					},
 				},
