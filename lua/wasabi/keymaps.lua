@@ -5,6 +5,7 @@ local notify = require("wasabi.util").notify;
 
 -- MISC IMPORTANT
 
+set("n", "<Space>p", "<Nop>", "Remove some freaky paste operation");
 set({ "n", "v" }, "<Space>", "<Nop>", "Remove any action <Space> had", { silent = true });
 set("n", "<Enter>", "i<Enter><Esc>^", "Enter behaviour from insert in normal mode");
 

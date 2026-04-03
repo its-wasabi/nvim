@@ -56,7 +56,7 @@ require("blink.cmp").setup({
 				module = "blink-cmp-env",
 				score_offset = 10,
 				opts = {
-					item_kind = require("blink.cmp.types").CompletionItemKind.Variable, -- TODO: Check if Value isn't more suitable
+					item_kind = require("blink.cmp.types").CompletionItemKind.Variable,
 					show_braces = false,
 					show_documentation_window = true,
 				}

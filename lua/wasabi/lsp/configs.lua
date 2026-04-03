@@ -149,4 +149,13 @@ return {
 			}
 		}
 	},
+
+	html = {
+		filetypes = {
+			"html",
+			"htmx",
+			"htmldjango",
+			"php",
+		}
+	}
 }

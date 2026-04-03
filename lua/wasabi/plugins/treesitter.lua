@@ -30,6 +30,7 @@ local parsers = {
 
 	"asm",
 	"c",
+	"cpp",
 	"rust",
 	"go",
 

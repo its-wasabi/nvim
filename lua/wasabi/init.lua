@@ -45,21 +45,23 @@ else
 		-- Injections
 		{ src = "https://github.com/Fasamii/embed.nvim" },
 
-		-- Icons dependency for: [ "Telescope", "Lualine", "Netrw-icons" ]
-		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 		-- Peak lines
 		{ src = "https://github.com/nacro90/numb.nvim" },
+
+		-- Icons dependency for: [ "Telescope", "Lualine", "Netrw-icons" ]
+		{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 		-- Netrw icons
 		{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
 		-- Lualine
 		{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-		-- Indentation lines
-		{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
 
 		-- Plenary dependency for: [ "Telescope" ]
 		{ src = "https://github.com/nvim-lua/plenary.nvim" },
 		-- Telescope
 		{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+
+		-- Indentation lines
+		{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
 
 		-- Git
 		{ src = "https://github.com/lewis6991/gitsigns.nvim" },
@@ -93,11 +95,8 @@ else
 		{ src = "https://github.com/michaelb/sniprun.git" },
 
 		-- Startup time measuring
-		-- (n)vim --startuptime logfile
+		-- (n)vim --startuptime file.log
 		{ src = "https://github.com/dstein64/vim-startuptime.git" },
-
-		-- Fucking tetris lol
-		{ src = "https://github.com/alec-gibson/nvim-tetris.git" },
 	});
 
 	vim.cmd.colorscheme("sobsob");
