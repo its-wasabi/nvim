@@ -1,0 +1,95 @@
+if vim.loader then vim.loader.enable() end
+
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_gzip = 1
+
+local nvim_font = "Iosevka Code"
+local nvim_font_size = 10;
+if vim.env.TERM == "xterm-kitty" then
+	vim.api.nvim_create_autocmd("VimEnter", {
+		callback = function()
+			vim.fn.jobstart({ "kitty", "@", "set-spacing", "padding=0", }, { detach = true })
+			vim.fn.jobstart({ "kitty", "@", "load-config",
+				"-o", ("font_family=" .. tostring(nvim_font)),
+				"-o", ("font_size=" .. tostring(nvim_font_size)),
+			})
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("VimLeavePre", {
+		callback = function()
+			vim.fn.system({ "kitty", "@", "set-spacing", "padding=default", "margin=default", })
+			vim.fn.system({ "kitty", "@", "load-config", "--ignore-overrides" })
+		end,
+	})
+end
+
+require("opts")
+require("keybinds")
+
+if not vim.pack then
+	vim.cmd.colorscheme("wildcharm")
+	return
+end
+
+vim.pack.add({
+	-- Styling
+	{ src = "https://github.com/Fasamii/sobsob.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
+
+	-- Essentials
+	{ src = "https://github.com/j-hui/fidget.nvim" },
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+
+	-- Treesitter
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+
+	-- Telescope
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+
+	-- LSP
+	{ src = "https://github.com/williamboman/mason.nvim" },
+	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/b0o/schemastore.nvim" },
+
+	-- Completion
+	{ src = "https://github.com/saghen/blink.lib" },
+	{ src = "https://github.com/saghen/blink.cmp" },
+
+	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
+	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
+	{ src = "https://github.com/archie-judd/blink-cmp-words" },
+
+	{ src = "https://github.com/Saghen/blink.compat" },
+	{ src = "https://github.com/hrsh7th/cmp-calc" },
+})
+
+vim.cmd.colorscheme("sobsob")
+vim.notify = require("fidget").notify
+
+require("plugins.lualine")
+require("plugins.netrw-icons")
+require("plugins.fidget")
+require("plugins.treesitter")
+require("plugins.treesitter-context")
+
+require("plugins.telescope")
+
+vim.api.nvim_create_autocmd("FileType", {
+	once = true,
+	callback = function()
+		require("lsp");
+	end,
+});

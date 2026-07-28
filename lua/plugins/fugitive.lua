@@ -1,0 +1,1 @@
+require("wasabi.keymaps").fugitive();
