@@ -2,7 +2,7 @@ local persistence = require("persistence")
 
 persistence.setup({
 	branch = true,
-	need = 2,
+	need = 3,
 })
 
 local pickers = require("telescope.pickers");

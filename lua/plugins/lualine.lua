@@ -104,8 +104,6 @@ require("lualine").setup({
 			},
 			{
 				"diagnostics",
-				-- TODO: Check if that is automatic and set that
-				-- sources = {},
 				update_in_insert = false,
 				colored = true,
 				always_visible = false,
@@ -170,16 +168,6 @@ require("lualine").setup({
 				padding = { left = 1, right = 1 },
 			},
 		},
-	},
-
-	-- TODO: Set inactive section
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {}
 	},
 
 	tabline = {},

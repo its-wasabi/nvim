@@ -115,15 +115,14 @@ cmp.setup({
 				},
 			},
 
-			latex = {
-				name = "Latex",
-				module = "blink-cmp-latex",
-				score_offset = 85,
-				min_keyword_length = 2,
-				opts = {
-					insert_command = true,
-				},
-			},
+			-- latex = {
+			-- 	name = "Latex",
+			-- 	module = "blink-cmp-latex",
+			-- 	score_offset = 85,
+			-- 	opts = {
+			-- 		insert_command = true,
+			-- 	},
+			-- },
 
 			thesaurus = {
 				name = "blink-cmp-words",

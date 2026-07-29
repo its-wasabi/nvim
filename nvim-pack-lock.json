@@ -119,6 +119,10 @@
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
+    },
+    "vim-colorscheme-kemonofriends": {
+      "rev": "e575546c0e9009ab18a04593747fe5fe9eb0db39",
+      "src": "https://github.com/machakann/vim-colorscheme-kemonofriends"
     }
   }
 }

@@ -41,6 +41,7 @@ local parsers = {
 
 	"markdown",
 	"markdown_inline",
+	"latex",
 
 	"glsl",
 };

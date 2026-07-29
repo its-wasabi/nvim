@@ -14,8 +14,8 @@ set({ "n", "v", "o" }, "L", "$", "Move far", { noremap = true, silent = true });
 set({ "n", "v", "o" }, "J", "G", "Move far", { noremap = true, silent = true });
 set({ "n", "v", "o" }, "K", "gg", "Move far", { noremap = true, silent = true });
 
-set("n", "<A-h>", "<cmd>bprevious<CR>", "Last buffer");
 set("n", "<A-l>", "<cmd>bnext<CR>", "Next buffer");
+set("n", "<A-h>", "<cmd>bprevious<CR>", "Last buffer");
 
 set("v", "o", "\"_dP", "Override");
 
@@ -23,6 +23,9 @@ set("n", "vef", "ggVG", "Select entire buffer");
 
 set("v", "<C-k>", ":m '<-2<CR>gv-gv", "Move lines down in visual mode");
 set("v", "<C-j>", ":m '>+1<CR>gv-gv", "Move lines down in visual mode");
+
+set("n", "n", "nzz", "Always center next")
+set("n", "N", "Nzz", "Always center prev")
 
 set("v", "<", "<gv", "Indent right without removing highlight");
 set("v", ">", ">gv", "Indent right without removing highlight");

@@ -1,4 +1,4 @@
-if vim.loader then vim.loader.enable() end
+vim.loader.enable()
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -10,7 +10,7 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_gzip = 1
 
 local nvim_font = "Iosevka Code"
-local nvim_font_size = 10;
+local nvim_font_size = 10
 if vim.env.TERM == "xterm-kitty" then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		callback = function()
@@ -30,6 +30,12 @@ if vim.env.TERM == "xterm-kitty" then
 	})
 end
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "DiffChange", timeout = 240 })
+	end,
+})
+
 require("opts")
 require("keybinds")
 require("diagnostics")
@@ -40,12 +46,14 @@ if not vim.pack then
 end
 
 vim.pack.add({
+	-- Color Theme
+	{ src = "https://github.com/Fasamii/sobsob.nvim" },
+	{ src = "https://github.com/machakann/vim-colorscheme-kemonofriends" },
 	-- Treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	-- Styling
-	{ src = "https://github.com/Fasamii/sobsob.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
 	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
@@ -63,8 +71,10 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.lib" },
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
-	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
 	{ src = "https://github.com/archie-judd/blink-cmp-words" },
+	-- FIX: Plugin is broken with newer blink.cmp version
+	-- Maintainer is waiting for blink v2 to be stable
+	-- { src = "https://github.com/erooke/blink-cmp-latex.git" },
 	-- Utilities
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/nacro90/numb.nvim" },
@@ -75,7 +85,6 @@ vim.pack.add({
 	{ src = "https://github.com/folke/persistence.nvim" },
 	-- Markdown
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-	{ src = "https://github.com/Thiago4532/mdmath.nvim" },
 })
 
 vim.cmd.colorscheme("sobsob")
@@ -90,7 +99,7 @@ if not vim.g.neovide then
 	require("plugins.netrw-icons")
 end
 require("plugins.lualine")
-require("plugins.indent-blankline")
+-- require("plugins.indent-blankline")
 
 require("plugins.telescope")
 
@@ -102,8 +111,7 @@ require("plugins.smart-backspace")
 require("plugins.persistence")
 
 -- Markdown
-require("plugins.markdown");
-require("plugins.mdmath");
+require("plugins.render-markdown");
 
 vim.lsp.log.set_level(vim.log.levels.OFF)
 vim.api.nvim_create_autocmd("FileType", {

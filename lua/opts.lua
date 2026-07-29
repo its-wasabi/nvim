@@ -16,10 +16,12 @@ vim.opt.termguicolors = true;
 --	"" - disabled
 --	"a" - all
 --	combination of "nvi" - selective
-vim.opt.mouse = "nv";
+vim.opt.mouse = "";
 -- Highlights the screen line the cursor is currently on
 vim.opt.cursorline = true;
 
+-- remove tilde from empty lines
+vim.opt.fillchars = { eob = " " }
 -- Show absolute line number on the current line
 vim.opt.number = true;
 -- Show relative line numbers on all other lines
@@ -60,7 +62,7 @@ vim.opt.sidescrolloff = 8;
 --  "all" - anywhere (can break assumptions)
 vim.opt.virtualedit = "block";
 
-local tab_size = 4; -- TODO: Make some global table wit settings like that
+local tab_size = 4;
 -- Use literal tab characters (\t) instead of spaces
 -- false = tabs, true = spaces
 vim.opt.expandtab = false;
@@ -211,7 +213,6 @@ if vim.g.neovide then
 	vim.g.neovide_scroll_animation_length = 0.1;
 	vim.g.neovide_scroll_animation_far_lines = 0;
 
-	-- TODO: Check what is that progress bar
 	vim.g.neovide_progress_bar_enabled = true;
 	vim.g.neovide_progress_bar_height = 5.0;
 	vim.g.neovide_progress_bar_animation_speed = 200.0;
