@@ -123,11 +123,11 @@ local function session_picker()
 				end)
 			end
 
-			require("wasabi.keymaps").persistence_picker(map, delete_session);
+			require("keybinds").persistence_picker(map, delete_session);
 
 			return true
 		end,
 	}):find()
 end
 
-require("wasabi.keymaps").persistence(persistence, session_picker)
+require("keybinds").persistence(persistence, session_picker)

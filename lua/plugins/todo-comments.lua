@@ -4,50 +4,40 @@ require("todo-comments").setup({
 	sign_priority = 8,
 
 	keywords = {
-		SAFETY = {
+		NOTE = {
 			signs = false,
 			icon = "S",
 			color = "info",
+			alt = { "READ", "CHECK", "NOTE" },
 		},
-		STUDY = {
+
+		TODO = {
 			signs = false,
-			icon = "S",
-			color = "info",
-			alt = { "READ", "CHECK" },
+			icon = "T",
+			color = "warn",
 		},
+
+		WARN = {
+			signs = false,
+			icon = "W",
+			color = "warn",
+			alt = { "WARNING", "XXX" }
+		},
+
 		FIX = {
 			signs = false,
 			icon = "X",
 			color = "error",
 			alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "ERR", "ERROR" },
 		},
-		TODO = {
-			signs = false,
-			icon = "T",
-			color = "warn",
-		},
-		IMPORTANT = {
-			signs = false,
-			icon = "!!",
-			color = "error",
-		},
-		WARN = {
-			signs = false,
-			icon = "w",
-			color = "warn",
-			alt = { "WARNING", "XXX" }
-		},
-		HACK = {
-			signs = false,
-			icon = "H",
-			color = "error",
-		},
+
 		PERF = {
 			signs = false,
 			icon = "P",
 			color = "hint",
-			alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" }
+			alt = { "PERFORMANCE" }
 		},
+
 		TEST = {
 			signs = false,
 			icon = "T",
@@ -55,6 +45,7 @@ require("todo-comments").setup({
 			alt = { "TESTING", "PASSED", "FAILED" },
 		},
 	},
+
 	gui_style = {
 		fg = "BOLD", -- The gui style to use for the fg highlight group.
 		bg = "BOLD", -- The gui style to use for the bg highlight group.
@@ -101,4 +92,4 @@ require("todo-comments").setup({
 	},
 });
 
-require("wasabi.keymaps").todo_comments();
+require("keybinds").todo_comments();

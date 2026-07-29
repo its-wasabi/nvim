@@ -32,6 +32,7 @@ end
 
 require("opts")
 require("keybinds")
+require("diagnostics")
 
 if not vim.pack then
 	vim.cmd.colorscheme("wildcharm")
@@ -39,54 +40,72 @@ if not vim.pack then
 end
 
 vim.pack.add({
+	-- Treesitter
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	-- Styling
 	{ src = "https://github.com/Fasamii/sobsob.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/j-hui/fidget.nvim" },
 	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
-
-	-- Essentials
-	{ src = "https://github.com/j-hui/fidget.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-
-	-- Treesitter
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-
+	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
 	-- Telescope
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-
 	-- LSP
 	{ src = "https://github.com/williamboman/mason.nvim" },
 	{ src = "https://github.com/williamboman/mason-lspconfig.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/b0o/schemastore.nvim" },
-
 	-- Completion
 	{ src = "https://github.com/saghen/blink.lib" },
 	{ src = "https://github.com/saghen/blink.cmp" },
-
 	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
 	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
 	{ src = "https://github.com/archie-judd/blink-cmp-words" },
-
-	{ src = "https://github.com/Saghen/blink.compat" },
-	{ src = "https://github.com/hrsh7th/cmp-calc" },
+	-- Utilities
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/nacro90/numb.nvim" },
+	{ src = "https://github.com/folke/todo-comments.nvim" },
+	{ src = "https://github.com/qwavies/smart-backspace.nvim" },
+	{ src = "https://github.com/Fasamii/embed.nvim" },
+	-- Session
+	{ src = "https://github.com/folke/persistence.nvim" },
+	-- Markdown
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+	{ src = "https://github.com/Thiago4532/mdmath.nvim" },
 })
 
 vim.cmd.colorscheme("sobsob")
 vim.notify = require("fidget").notify
 
-require("plugins.lualine")
-require("plugins.netrw-icons")
-require("plugins.fidget")
 require("plugins.treesitter")
 require("plugins.treesitter-context")
 
+require("plugins.nvim-web-devicons")
+require("plugins.fidget")
+if not vim.g.neovide then
+	require("plugins.netrw-icons")
+end
+require("plugins.lualine")
+require("plugins.indent-blankline")
+
 require("plugins.telescope")
 
+require("plugins.gitsigns")
+require("plugins.numb")
+require("plugins.todo-comments")
+require("plugins.smart-backspace")
+
+require("plugins.persistence")
+
+-- Markdown
+require("plugins.markdown");
+require("plugins.mdmath");
+
+vim.lsp.log.set_level(vim.log.levels.OFF)
 vim.api.nvim_create_autocmd("FileType", {
 	once = true,
 	callback = function()

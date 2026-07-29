@@ -142,9 +142,9 @@ vim.g.netrw_banner = 0;
 -- Directory listing style
 -- 0 = simple, 1 = detailed, 2 = wide, 3 = tree view
 vim.g.netrw_liststyle = 3;
--- Keep the current directory:
+-- Keep the cwd:
 -- 0 = same as browsing dir, 1 = immune from browsing dir
-vim.g.netrw_keepdir = 0;
+vim.g.netrw_keepdir = 1;
 -- Shell command used to copy directories
 vim.g.netrw_localcopydircmd = "cp -r";
 -- Shell command used to remove directories

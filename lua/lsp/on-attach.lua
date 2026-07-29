@@ -1,6 +1,6 @@
 return function(client, bufnr)
 	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-	require("wasabi.keymaps").lsp_attach(bufnr);
+	require("keybinds").lsp_attach(bufnr);
 
 	if client.name == "rust_analyzer" then
 		if vim.fn.isdirectory("/usr/lib/rustlib/src/rust/library") == 0 then
@@ -12,25 +12,24 @@ return function(client, bufnr)
 		end
 	end
 
-	-- Inlay hints (0.10+)
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 
-	-- CodeLens
 	if client.server_capabilities.codeLensProvider then
-		-- vim.lsp.codelens.enable(); -- NOTE: disable that by default
+		vim.lsp.codelens.enable(false);
 	end
 
-	-- Document highlight (0.12+)
 	if client.server_capabilities.documentHighlightProvider then
-		local highlight_group = vim.api.nvim_create_augroup("LspDocumentHighlight_" .. bufnr, { clear = true })
+		local group_name = "LspDocumentHighlight_" .. bufnr
+		local highlight_group = vim.api.nvim_create_augroup(group_name, { clear = true })
+
 		vim.api.nvim_create_autocmd("CursorHold", {
 			group = highlight_group,
 			buffer = bufnr,
 			callback = function() vim.lsp.buf.document_highlight() end,
 		})
-		vim.api.nvim_create_autocmd("CursorMoved", {
+		vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter" }, {
 			group = highlight_group,
 			buffer = bufnr,
 			callback = function() vim.lsp.buf.clear_references() end,

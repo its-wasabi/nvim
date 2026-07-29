@@ -1,8 +1,10 @@
 local M = {}
+
 local set = require("utils").set
+local make_set_buf = require("utils").make_set_buf
 local smart_resize = require("utils").smart_resize
-local set_pwd = require("utils").set_pwd;
-local find_git_root = require("utils").find_git_root
+local set_pwd_to_current_dir = require("utils").set_pwd_to_current_dir
+local set_pwd_to_git_root = require("utils").set_pwd_to_git_root
 
 set("n", "<Space>p", "<Nop>", "Remove paste operation");
 set({ "n", "v" }, "<Space>", "<Nop>", "Remove any action <Space> had", { silent = true });
@@ -68,27 +70,16 @@ set("n", "zr", function()
 end, "Remove word from dictionary");
 
 set("n", "<leader>cD", function()
-	local current_file = vim.fn.expand("%:p:h");
-	if current_file ~= '' then
-		set_pwd(current_file);
-	else
-		notify("failed to set pwd", vim.log.levels.ERROR)
-	end
+	set_pwd_to_current_dir()
 end, "set pwd to current file directory", { silent = false });
 set("n", "<leader>cd", function()
-	local current_file = vim.fn.expand("%:p:h");
-	local git_root = find_git_root(current_file);
-	if git_root then
-		set_pwd(git_root);
-	else
-		notify("failed to set pwd", vim.log.levels.ERROR)
-	end
+	set_pwd_to_git_root()
 end, "set pwd to git root", { silent = false });
 
 
 if vim.g.neovide then
-	local change_scale_factor = function(delta)
-		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+	local change_scale_factor = function(factor)
+		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * factor
 	end
 
 	set("n", "<C-0>", function()
@@ -100,58 +91,6 @@ if vim.g.neovide then
 	set("n", "<C-->", function()
 		change_scale_factor(1 / 1.25)
 	end, "decrease scale factor (neovide)");
-end
-
-function M.lsp_attach()
-	local function buf_set(mode, keymap, what, desc)
-		set(mode, keymap, what, desc, { buffer = bufnr });
-	end
-
-	-- TOGGLE DIAGNOSTICS
-	buf_set("n", "td", function()
-		vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
-	end, "toggle diagnostics");
-	-- TOGGLE INLAY HINTS (0.10+)
-	buf_set("n", "th", function()
-		local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
-		vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
-	end, "toggle inlay hints")
-	-- TOGGLE CODELENS
-	buf_set("n", "tl", function()
-		vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = bufnr }));
-	end, "toggle codelens")
-
-	-- DOCUMENTATION
-	buf_set("n", "K", vim.lsp.buf.hover, "show hover documentation")
-	buf_set("n", "<C-k>", vim.lsp.buf.signature_help, "show signature help")
-
-	-- ACTIONS
-	buf_set("n", "<leader>pr", vim.lsp.buf.rename, "rename symbol")
-	buf_set("n", "<leader>ca", vim.lsp.buf.code_action, "code action")
-	buf_set("n", "<leader>cf", function()
-		vim.lsp.buf.format({ async = true })
-	end, "format document")
-
-	-- NAVIGATION
-	buf_set("n", "gd", vim.lsp.buf.definition, "go to definition")
-	buf_set("n", "gD", vim.lsp.buf.declaration, "go to declaration")
-	buf_set("n", "gi", vim.lsp.buf.implementation, "go to implementation")
-	buf_set("n", "gr", vim.lsp.buf.references, "show references")
-	buf_set("n", "gt", vim.lsp.buf.type_definition, "go to type definition")
-
-	-- DIAGNOSTICS
-	buf_set("n", "<leader>ce", vim.diagnostic.open_float, "show diagnostic")
-
-
-
-
-	-- buf_set("n", "<leader>cq", vim.diagnostic.setloclist, "diagnostics to loclist")
-	-- WORKSPACE
-	-- buf_set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "add workspace folder")
-	-- buf_set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "remove workspace folder")
-	-- buf_set("n", "<leader>wl", function()
-	-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	-- end, "list workspace folders")
 end
 
 M.blink = {
@@ -251,6 +190,114 @@ function M.telescope(builtin)
 	set("n", "<leader>lS", builtin.lsp_workspace_symbols, "LSP workspace symbols");
 	set("n", "<leader>lw", builtin.lsp_dynamic_workspace_symbols, "LSP dynamic workspace symbols");
 	set("n", "<leader>le", builtin.diagnostics, "LSP diagnostics");
+end
+
+-- TOOD: Unify that into single method
+function M.persistence(persistence, picker)
+	set("n", "<leader>sr", function()
+		persistence.load({ last = true });
+	end, "Session restore");
+
+	set("n", "<leader>sp", function()
+		picker();
+	end, "Session select");
+
+	set("n", "<leader>sd", function()
+		persistence.stop();
+	end, "Session delete");
+end
+
+function M.persistence_picker(map, delete_session)
+	map("i", "<C-d>", delete_session)
+	map("n", "<C-d>", delete_session)
+end
+
+function M.todo_comments()
+	set("n", "<leader>ml", "<cmd>TodoTelescope<cr>", "list all labels");
+	set("n", "<leader>mfl", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG,FIXIT,ISSUE,ERR<cr>", "list all FIXME labels");
+	set("n", "<leader>mtl", "<cmd>TodoTelescope keywords=TODO,LATER<cr>", "list all TODO labels");
+	set("n", "<leader>mwl", "<cmd>TodoTelescope keywords=WARN,WARNING,XXX<cr>", "list all WARN labels");
+	set("n", "<leader>mil", "<cmd>TodoTelescope keywords=NOTE,INFO<cr>", "list all NOTE labels");
+	set("n", "<leader>mol", "<cmd>TodoTelescope keywords=PERF,OPTIM,PERFORMANCE,OPTIMIZE<cr>", "list all PERF labels");
+	set("n", "<leader>mel", "<cmd>TodoTelescope keywords=TEST,TESTING,PASSED,FAILED<cr>", "list all TEST labels");
+
+	set("n", "<leader>mn", function() require("todo-comments").jump_next() end, "Next label");
+	set("n", "<leader>mp", function() require("todo-comments").jump_prev() end, "Previous label");
+
+	set("n", "<leader>mfn",
+		function() require("todo-comments").jump_next({ keywords = { "FIX", "FIXME", "BUG", "FIXIT", "ISSUE", "ERR" } }) end,
+		"Next FIXME label");
+	set("n", "<leader>mfp",
+		function() require("todo-comments").jump_prev({ keywords = { "FIX", "FIXME", "BUG", "FIXIT", "ISSUE", "ERR" } }) end,
+		"Prev FIXME label");
+
+	set("n", "<leader>mtn", function() require("todo-comments").jump_next({ keywords = { "TODO", "LATER" } }) end,
+		"Next TODO label");
+	set("n", "<leader>mtp", function() require("todo-comments").jump_prev({ keywords = { "TODO", "LATER" } }) end,
+		"Prev TODO label");
+
+	set("n", "<leader>mwn",
+		function() require("todo-comments").jump_next({ keywords = { "WARN", "WARNING", "XXX" } }) end, "Next WARN label");
+	set("n", "<leader>mwp",
+		function() require("todo-comments").jump_prev({ keywords = { "WARN", "WARNING", "XXX" } }) end, "Prev WARN label");
+
+	set("n", "<leader>min", function() require("todo-comments").jump_next({ keywords = { "NOTE", "INFO" } }) end,
+		"Next NOTE label");
+	set("n", "<leader>mip", function() require("todo-comments").jump_prev({ keywords = { "NOTE", "INFO" } }) end,
+		"Prev NOTE label");
+
+	set("n", "<leader>mon",
+		function() require("todo-comments").jump_next({ keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" } }) end,
+		"Next PERF label");
+	set("n", "<leader>mop",
+		function() require("todo-comments").jump_prev({ keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTIMIZE" } }) end,
+		"Prev PERF label");
+
+	set("n", "<leader>men",
+		function() require("todo-comments").jump_next({ keywords = { "TEST", "TESTING", "PASSED", "FAILED" } }) end,
+		"Next TEST label");
+	set("n", "<leader>mep",
+		function() require("todo-comments").jump_prev({ keywords = { "TEST", "TESTING", "PASSED", "FAILED" } }) end,
+		"Prev TEST label");
+end
+
+function M.lsp_attach(bufnr)
+	local set_buf = make_set_buf(bufnr)
+
+	set_buf("n", "td", function()
+		vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+	end, "toggle diagnostics");
+	set_buf("n", "th", function()
+		local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+		vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+	end, "toggle inlay hints")
+	set_buf("n", "tl", function()
+		vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled({ bufnr = bufnr }));
+	end, "toggle codelens")
+
+	set_buf("n", "<C-k>", vim.lsp.buf.hover, "show hover documentation")
+
+	set_buf("n", "<leader>pr", vim.lsp.buf.rename, "rename symbol")
+	set_buf("n", "<leader>ca", vim.lsp.buf.code_action, "code action")
+	set_buf("n", "<leader>cf", function()
+		vim.lsp.buf.format({ async = true })
+	end, "format document")
+
+	set_buf("n", "gd", vim.lsp.buf.definition, "go to definition")
+	set_buf("n", "gD", vim.lsp.buf.declaration, "go to declaration")
+	set_buf("n", "gi", vim.lsp.buf.implementation, "go to implementation")
+	set_buf("n", "gr", vim.lsp.buf.references, "show references")
+	set_buf("n", "gt", vim.lsp.buf.type_definition, "go to type definition")
+
+	set_buf("n", "<C-e>", vim.diagnostic.open_float, "show diagnostic")
+
+	-- buf_set("n", "<leader>cq", vim.diagnostic.setloclist, "diagnostics to loclist")
+	-- WORKSPACE
+	-- buf_set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "add workspace folder")
+	-- buf_set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "remove workspace folder")
+	-- buf_set("n", "<leader>wl", function()
+	-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	-- end, "list workspace folders")
 end
 
 return M

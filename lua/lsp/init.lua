@@ -1,5 +1,3 @@
-vim.lsp.log.set_level(vim.log.levels.OFF)
-
 local capabilities = vim.lsp.protocol.make_client_capabilities();
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities);
 
@@ -7,7 +5,6 @@ capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
-
 capabilities.textDocument.hover = {
 	contentFormat = { "markdown", "plaintext" },
 	dynamicRegistration = false,
@@ -20,7 +17,7 @@ capabilities.textDocument.semanticTokens = vim.tbl_deep_extend("force", capabili
 		range = true,
 	},
 	multilineTokenSupport = true,
-	overlappingTokenSupport = false,
+	overlappingTokenSupport = true,
 });
 
 capabilities.workspace = vim.tbl_deep_extend("force", capabilities.workspace or {}, {
@@ -44,27 +41,25 @@ capabilities.workspace = vim.tbl_deep_extend("force", capabilities.workspace or 
 });
 
 local on_attach = require("lsp.on-attach");
-local servers = require("lsp.configs");
-
-for server, config in pairs(servers) do
+local configs = require("lsp.configs");
+for server_name, config in pairs(configs) do
 	config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {});
 	config.on_attach = on_attach;
-	vim.lsp.config(server, config);
+	vim.lsp.config(server_name, config);
 end
 
 require("lsp.servers");
 require("lsp.completion")
 
--- TODO: Move autocmd to either autocmd file or on-attach
 local format_on_save_group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = format_on_save_group,
 	pattern = { "*.rs", "*.c", "*.cpp", "*.h", "*.lua", "*.py", "*.js", "*.ts" },
-	callback = function()
-		-- Use new 0.12.0+ async formatting
+	callback = function(args)
 		vim.lsp.buf.format({
-			async = false,
+			bufnr = args.buf,
 			timeout_ms = 2000,
+			async = true,
 		})
 	end,
 })
