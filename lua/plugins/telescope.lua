@@ -2,7 +2,6 @@ local telescope = require("telescope")
 telescope.setup({
 	path_display = { "smart" },
 	defaults = {
-
 		border = true,
 		color_devicons = true,
 		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
@@ -39,6 +38,18 @@ telescope.setup({
 			"--smart-case",
 		},
 	},
+
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		}
+	}
 });
+
+-- TODO: Run make automatically
+telescope.load_extension("fzf");
 
 require("keybinds").telescope(require("telescope.builtin"))

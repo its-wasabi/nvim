@@ -32,10 +32,9 @@ require("render-markdown").setup({
 		enabled = true,
 		render_modes = true,
 		converter = "utftex",
-		highlight = "RenderMarkdownMath",
 		position = "below",
 		top_pad = 0,
-		bottom_pad = 1,
+		bottom_pad = 0,
 	},
 
 	heading = {
@@ -54,29 +53,13 @@ require("render-markdown").setup({
 		border = false,
 		border_virtual = true,
 		border_prefix = false,
-		above = '▄',
-		below = '▀',
-		backgrounds = {
-			'RenderMarkdownH1Bg',
-			'RenderMarkdownH2Bg',
-			'RenderMarkdownH3Bg',
-			'RenderMarkdownH4Bg',
-			'RenderMarkdownH5Bg',
-			'RenderMarkdownH6Bg',
-		},
-		foregrounds = {
-			'RenderMarkdownH1',
-			'RenderMarkdownH2',
-			'RenderMarkdownH3',
-			'RenderMarkdownH4',
-			'RenderMarkdownH5',
-			'RenderMarkdownH6',
-		},
+		above = "▄",
+		below = "▀",
 		custom = {},
 	},
 
 	paragraph = {
-		enabled = true,
+		enabled = false,
 		render_modes = true,
 		left_margin = 0,
 		indent = vim.opt.tabstop:get(),
@@ -99,33 +82,28 @@ require("render-markdown").setup({
 		right_pad = 0,
 		min_width = 0,
 		inline_pad = 0,
-		highlight = 'RenderMarkdownCode',
 		highlight_language = nil,
-		highlight_inline = 'RenderMarkdownCodeInline',
 	},
 
 	dash = {
 		enabled = true,
 		render_modes = true,
-		-- TODO: Replaces '---'|'***'|'___'|'* * *'
 		icon = "─",
 		width = "full",
 		left_margin = 0,
-		highlight = 'RenderMarkdownDash',
 	},
 
 	bullet = {
 		enabled = true,
 		render_modes = true,
 		icons = { "▶ ", "▷", "▶▶ ", "▷▷ " },
-		ordered_icons = function(ctx) -- TODO: check what this code does
+		ordered_icons = function(ctx)
 			local value = vim.trim(ctx.value)
 			local index = tonumber(value:sub(1, #value - 1))
-			return ('%d.'):format(index > 1 and index or ctx.index)
+			return ("%d."):format(index > 1 and index or ctx.index)
 		end,
 		left_pad = 0,
 		right_pad = 0,
-		highlight = 'RenderMarkdownBullet',
 		scope_highlight = {},
 	},
 
@@ -135,12 +113,14 @@ require("render-markdown").setup({
 		bullet = true,
 		right_pad = 1,
 		unchecked = {
-			highlight = 'RenderMarkdownUnchecked',
 			scope_highlight = nil,
 		},
 		checked = {
-			highlight = 'RenderMarkdownChecked',
 			scope_highlight = nil,
+		},
+
+		custom = {
+			todo = { raw = '[-]', rendered = '󰿦 ', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
 		},
 	},
 
@@ -149,14 +129,6 @@ require("render-markdown").setup({
 		render_modes = true,
 		icon = "▋",
 		repeat_linebreak = false,
-		highlight = {
-			'RenderMarkdownQuote1',
-			'RenderMarkdownQuote2',
-			'RenderMarkdownQuote3',
-			'RenderMarkdownQuote4',
-			'RenderMarkdownQuote5',
-			'RenderMarkdownQuote6',
-		},
 	},
 
 	pipe_table = {
@@ -168,46 +140,47 @@ require("render-markdown").setup({
 		padding = 1,
 		min_width = 0,
 		border = {
-			'┌', '┬', '┐',
-			'├', '┼', '┤',
-			'└', '┴', '┘',
-			'│', '─',
+			"┌", "┬", "┐",
+			"├", "┼", "┤",
+			"└", "┴", "┘",
+			"│", "─",
 		},
 		border_virtual = true,
 		alignment_indicator = "━",
-		head = "RenderMarkdownTableHead",
-		row = "RenderMarkdownTableRow",
-		filler = "RenderMarkdownTableFill",
 	},
 
+
+
+
+	-- TODO: Change the icons and colors
 	callout = {
 		note      = { raw = '[!NOTE]', rendered = '󰋽 Note', highlight = 'RenderMarkdownInfo', category = 'github' },
 		tip       = { raw = '[!TIP]', rendered = '󰌶 Tip', highlight = 'RenderMarkdownSuccess', category = 'github' },
 		important = { raw = '[!IMPORTANT]', rendered = '󰅾 Important', highlight = 'RenderMarkdownHint', category = 'github' },
 		warning   = { raw = '[!WARNING]', rendered = '󰀪 Warning', highlight = 'RenderMarkdownWarn', category = 'github' },
 		caution   = { raw = '[!CAUTION]', rendered = '󰳦 Caution', highlight = 'RenderMarkdownError', category = 'github' },
-		abstract  = { raw = '[!ABSTRACT]', rendered = '󰨸 Abstract', highlight = 'RenderMarkdownInfo', category = 'obsidian' },
-		summary   = { raw = '[!SUMMARY]', rendered = '󰨸 Summary', highlight = 'RenderMarkdownInfo', category = 'obsidian' },
-		tldr      = { raw = '[!TLDR]', rendered = '󰨸 Tldr', highlight = 'RenderMarkdownInfo', category = 'obsidian' },
-		info      = { raw = '[!INFO]', rendered = '󰬐 Info', highlight = 'RenderMarkdownInfo', category = 'obsidian' },
-		todo      = { raw = '[!TODO]', rendered = ' Todo', highlight = 'RenderMarkdownInfo', category = 'obsidian' },
-		hint      = { raw = '[!HINT]', rendered = '󰌶 Hint', highlight = 'RenderMarkdownSuccess', category = 'obsidian' },
-		success   = { raw = '[!SUCCESS]', rendered = '󰄬 Success', highlight = 'RenderMarkdownSuccess', category = 'obsidian' },
-		check     = { raw = '[!CHECK]', rendered = '󰄬 Check', highlight = 'RenderMarkdownSuccess', category = 'obsidian' },
-		done      = { raw = '[!DONE]', rendered = '󰄬 Done', highlight = 'RenderMarkdownSuccess', category = 'obsidian' },
-		question  = { raw = '[!QUESTION]', rendered = '󰘥 Question', highlight = 'RenderMarkdownWarn', category = 'obsidian' },
-		help      = { raw = '[!HELP]', rendered = '󰘥 Help', highlight = 'RenderMarkdownWarn', category = 'obsidian' },
-		faq       = { raw = '[!FAQ]', rendered = '󰘥 Faq', highlight = 'RenderMarkdownWarn', category = 'obsidian' },
-		attention = { raw = '[!ATTENTION]', rendered = '󰀪 Attention', highlight = 'RenderMarkdownWarn', category = 'obsidian' },
-		failure   = { raw = '[!FAILURE]', rendered = '󰅖 Failure', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		fail      = { raw = '[!FAIL]', rendered = '󰅖 Fail', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		missing   = { raw = '[!MISSING]', rendered = '󰅖 Missing', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		danger    = { raw = '[!DANGER]', rendered = '󱐌 Danger', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		error     = { raw = '[!ERROR]', rendered = '󱐌 Error', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		bug       = { raw = '[!BUG]', rendered = '󰨰 Bug', highlight = 'RenderMarkdownError', category = 'obsidian' },
-		example   = { raw = '[!EXAMPLE]', rendered = '󰉹 Example', highlight = 'RenderMarkdownHint', category = 'obsidian' },
-		quote     = { raw = '[!QUOTE]', rendered = '󱆨 Quote', highlight = 'RenderMarkdownQuote', category = 'obsidian' },
-		cite      = { raw = '[!CITE]', rendered = '󱆨 Cite', highlight = 'RenderMarkdownQuote', category = 'obsidian' },
+		abstract  = { raw = "[!ABSTRACT]", rendered = "󰨸 Abstract", highlight = "RenderMarkdownInfo", category = "obsidian" },
+		summary   = { raw = "[!SUMMARY]", rendered = "󰨸 Summary", highlight = "RenderMarkdownInfo", category = "obsidian" },
+		tldr      = { raw = "[!TLDR]", rendered = "󰨸 Tldr", highlight = "RenderMarkdownInfo", category = "obsidian" },
+		info      = { raw = "[!INFO]", rendered = "󰬐 Info", highlight = "RenderMarkdownInfo", category = "obsidian" },
+		todo      = { raw = "[!TODO]", rendered = " Todo", highlight = "RenderMarkdownInfo", category = "obsidian" },
+		hint      = { raw = "[!HINT]", rendered = "󰌶 Hint", highlight = "RenderMarkdownSuccess", category = "obsidian" },
+		success   = { raw = "[!SUCCESS]", rendered = "󰄬 Success", highlight = "RenderMarkdownSuccess", category = "obsidian" },
+		check     = { raw = "[!CHECK]", rendered = "󰄬 Check", highlight = "RenderMarkdownSuccess", category = "obsidian" },
+		done      = { raw = "[!DONE]", rendered = "󰄬 Done", highlight = "RenderMarkdownSuccess", category = "obsidian" },
+		question  = { raw = "[!QUESTION]", rendered = "󰘥 Question", highlight = "RenderMarkdownWarn", category = "obsidian" },
+		help      = { raw = "[!HELP]", rendered = "󰘥 Help", highlight = "RenderMarkdownWarn", category = "obsidian" },
+		faq       = { raw = "[!FAQ]", rendered = "󰘥 Faq", highlight = "RenderMarkdownWarn", category = "obsidian" },
+		attention = { raw = "[!ATTENTION]", rendered = "󰀪 Attention", highlight = "RenderMarkdownWarn", category = "obsidian" },
+		failure   = { raw = "[!FAILURE]", rendered = "󰅖 Failure", highlight = "RenderMarkdownError", category = "obsidian" },
+		fail      = { raw = "[!FAIL]", rendered = "󰅖 Fail", highlight = "RenderMarkdownError", category = "obsidian" },
+		missing   = { raw = "[!MISSING]", rendered = "󰅖 Missing", highlight = "RenderMarkdownError", category = "obsidian" },
+		danger    = { raw = "[!DANGER]", rendered = "󱐌 Danger", highlight = "RenderMarkdownError", category = "obsidian" },
+		error     = { raw = "[!ERROR]", rendered = "󱐌 Error", highlight = "RenderMarkdownError", category = "obsidian" },
+		bug       = { raw = "[!BUG]", rendered = "󰨰 Bug", highlight = "RenderMarkdownError", category = "obsidian" },
+		example   = { raw = "[!EXAMPLE]", rendered = "󰉹 Example", highlight = "RenderMarkdownHint", category = "obsidian" },
+		quote     = { raw = "[!QUOTE]", rendered = "󱆨 Quote", highlight = "RenderMarkdownQuote", category = "obsidian" },
+		cite      = { raw = "[!CITE]", rendered = "󱆨 Cite", highlight = "RenderMarkdownQuote", category = "obsidian" },
 	},
 
 	link = {
@@ -216,35 +189,31 @@ require("render-markdown").setup({
 		footnote = {
 			enabled = true,
 			superscript = true,
-			prefix = '',
-			suffix = '',
+			prefix = "",
+			suffix = "",
 		},
 
-		image = '󰥶 ',
+		image = "󰥶 ",
 		image_custom = true,
-		email = '󰀓 ',
-		hyperlink = '󰌹 ',
-		highlight = 'RenderMarkdownLink',
-		highlight_title = 'RenderMarkdownLinkTitle',
+		email = "󰀓 ",
+		hyperlink = "󰌹 ",
 		wiki = {
 			enabled = true,
-			icon = '󱗖 ',
+			icon = "󱗖 ",
 			conceal_destination = true,
-			highlight = 'RenderMarkdownWikiLink',
 		},
 
 		custom = {
-			web = { pattern = '^http', icon = "󰾔 " },
-			discord = { pattern = 'discord%.com', icon = '󰙯 ' },
-			github = { pattern = 'github%.com', icon = ' ' },
-			gitlab = { pattern = 'gitlab%.com', icon = '󰮠 ' },
-			google = { pattern = 'google%.com', icon = ' ' },
-			neovim = { pattern = 'neovim%.io', icon = ' ' },
-			reddit = { pattern = 'reddit%.com', icon = ' ' },
-			stackoverflow = { pattern = 'stackoverflow%.com', icon = '󰓌 ' },
-			wikipedia = { pattern = 'wikipedia%.org', icon = '󰖬 ' },
-			youtube = { pattern = 'youtube%.com', icon = ' ' },
-			-- TODO: Test if these patterns work
+			web = { pattern = "^http", icon = "󰾔 " },
+			discord = { pattern = "discord%.com", icon = "󰙯 " },
+			github = { pattern = "github%.com", icon = " " },
+			gitlab = { pattern = "gitlab%.com", icon = "󰮠 " },
+			google = { pattern = "google%.com", icon = " " },
+			neovim = { pattern = "neovim%.io", icon = " " },
+			reddit = { pattern = "reddit%.com", icon = " " },
+			stackoverflow = { pattern = "stackoverflow%.com", icon = "󰓌 " },
+			wikipedia = { pattern = "wikipedia%.org", icon = "󰖬 " },
+			youtube = { pattern = "youtube%.com", icon = " " },
 			facebook = { pattern = "facebook%.com", icon = " " },
 			twitter = { pattern = "twitter%.com", icon = " " },
 			x = { pattern = "x%.com", icon = " " },

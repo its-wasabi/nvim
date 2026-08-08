@@ -48,6 +48,7 @@ end
 vim.pack.add({
 	-- Color Theme
 	{ src = "https://github.com/Fasamii/sobsob.nvim" },
+	{ src = "https://github.com/its-wasabi/stickynote.nvim" },
 	{ src = "https://github.com/machakann/vim-colorscheme-kemonofriends" },
 	-- Treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
@@ -61,6 +62,7 @@ vim.pack.add({
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
 	-- Telescope
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	-- LSP
 	{ src = "https://github.com/williamboman/mason.nvim" },
@@ -72,9 +74,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp" },
 	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
 	{ src = "https://github.com/archie-judd/blink-cmp-words" },
-	-- FIX: Plugin is broken with newer blink.cmp version
-	-- Maintainer is waiting for blink v2 to be stable
-	-- { src = "https://github.com/erooke/blink-cmp-latex.git" },
+	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
 	-- Utilities
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/nacro90/numb.nvim" },
@@ -85,6 +85,14 @@ vim.pack.add({
 	{ src = "https://github.com/folke/persistence.nvim" },
 	-- Markdown
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+})
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		if ev.data.spec.name == "telescope-fzf-native.nvim" then
+			print("telescope-fzf-native hook called")
+		end
+	end
 })
 
 vim.cmd.colorscheme("sobsob")

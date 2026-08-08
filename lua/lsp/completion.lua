@@ -1,3 +1,14 @@
+-- TODO: Remove when blink-cmp-latex finally starts supporting blink v2
+package.loaded["blink.cmp.lib.async"] = (function()
+	local task = require("blink.lib.task")
+	task.empty = task.resolve
+	task.on_completion = task.on_resolve
+	task.on_failure = task.on_reject
+	task.task = task
+	return task
+end)()
+
+
 local cmp = require("blink.cmp");
 local border = "none";
 
@@ -64,7 +75,7 @@ cmp.setup({
 
 
 	sources = {
-		default = { "lsp", "path", "buffer", "env", "dictionary", "thesaurus" },
+		default = { "lsp", "path", "buffer", "env", "dictionary", "thesaurus", "latex" },
 
 		providers = {
 			lsp = {
@@ -98,7 +109,7 @@ cmp.setup({
 							table.insert(result, buf.bufnr)
 						end
 
-						return bufs
+						return result
 					end,
 				},
 			},
@@ -115,14 +126,14 @@ cmp.setup({
 				},
 			},
 
-			-- latex = {
-			-- 	name = "Latex",
-			-- 	module = "blink-cmp-latex",
-			-- 	score_offset = 85,
-			-- 	opts = {
-			-- 		insert_command = true,
-			-- 	},
-			-- },
+			latex = {
+				name = "Latex",
+				module = "blink-cmp-latex",
+				score_offset = 85,
+				opts = {
+					insert_command = true,
+				},
+			},
 
 			thesaurus = {
 				name = "blink-cmp-words",
