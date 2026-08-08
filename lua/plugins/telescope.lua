@@ -49,7 +49,6 @@ telescope.setup({
 	}
 });
 
--- TODO: Run make automatically
 telescope.load_extension("fzf");
 
 require("keybinds").telescope(require("telescope.builtin"))

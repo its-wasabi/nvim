@@ -45,22 +45,9 @@ if not vim.pack then
 	return
 end
 
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		if ev.data.spec.name == "telescope-fzf-native.nvim" then
-			local result = vim.system({ "make" }, { cwd = ev.data.path }):wait()
-			if result.code == 0 then
-				vim.notify("telescope-fzf-native built successfully!", vim.log.levels.INFO)
-			else
-				if result.stderr and result.stderr ~= "" then
-					vim.notify("telescope-fzf-native build failed: \n\t" .. vim.trim(result.stderr), vim.log.levels
-						.ERROR)
-				else
-					vim.notify("telescope-fzf-native build failed" .. err_msg, vim.log.levels.ERROR)
-				end
-			end
-		end
-	end
+require("register-pack-hooks")({
+	["telescope-fzf-native.nvim"] = { "make" },
+	["blink.cmp"] = { "cargo", "build", "--release" },
 })
 
 vim.pack.add({
