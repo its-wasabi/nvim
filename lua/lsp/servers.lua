@@ -19,6 +19,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"typos_lsp",
 		"bashls",
+		"gopls",
 		"rust_analyzer",
 		"glsl_analyzer",
 		"clangd",

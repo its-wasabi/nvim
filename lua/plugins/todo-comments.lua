@@ -12,7 +12,7 @@ require("todo-comments").setup({
 		WARN = {
 			signs = false,
 			color = "warn",
-			alt = { "TODO", "WARNING", "XXX" }
+			alt = { "TODO", "WARNING", "XXX", "REMOVE" }
 		},
 
 		ERROR = {

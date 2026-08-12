@@ -50,18 +50,20 @@ require("register-pack-hooks")({
 	["blink.cmp"] = { "cargo", "build", "--release" },
 })
 
+
 vim.pack.add({
 	-- Color Theme
 	{ src = "https://github.com/Fasamii/sobsob.nvim" },
 	{ src = "https://github.com/its-wasabi/stickynote.nvim" },
-	{ src = "https://github.com/machakann/vim-colorscheme-kemonofriends" },
+	-- Icons
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	-- Notifications
+	{ src = "https://github.com/j-hui/fidget.nvim" },
 	-- Treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	-- Styling
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-	{ src = "https://github.com/j-hui/fidget.nvim" },
 	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
