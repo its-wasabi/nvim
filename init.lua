@@ -86,7 +86,6 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/nacro90/numb.nvim" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
-	{ src = "https://github.com/qwavies/smart-backspace.nvim" },
 	{ src = "https://github.com/Fasamii/embed.nvim" },
 	-- Session
 	{ src = "https://github.com/folke/persistence.nvim" },
@@ -113,7 +112,6 @@ require("plugins.telescope")
 require("plugins.gitsigns")
 require("plugins.numb")
 require("plugins.todo-comments")
-require("plugins.smart-backspace")
 
 require("plugins.persistence")
 

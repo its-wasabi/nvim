@@ -85,8 +85,8 @@ require("lualine").setup({
 
 
 				symbols = {
-					modified = "%#LualineFilenameSym# %#lualine_b_normal#",
-					readonly = "%#LualineFilenameSym# %#lualine_b_normal#",
+					modified = "%#LualineFilenameSym# %#lualine_b_normal#",
+					readonly = "%#LualineFilenameSym# %#lualine_b_normal#",
 				},
 
 				fmt = function(str)

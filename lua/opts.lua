@@ -126,20 +126,18 @@ vim.opt.incsearch = true;
 -- Enables persistent search highlighting
 vim.opt.hlsearch = true;
 
--- Use the system clipboard for all yank/paste operations
--- Scheduled to defer the clipboard provider check and reduce startup time
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus";
 	if vim.fn.executable('wl-copy') == 1 then
 		vim.g.clipboard = {
 			name = 'wl-clipboard',
 			copy = {
-				['+'] = 'wl-copy',
-				['*'] = 'wl-copy',
+				['+'] = { 'wl-copy' },
+				['*'] = { 'wl-copy' },
 			},
 			paste = {
-				['+'] = 'wl-paste',
-				['*'] = 'wl-paste',
+				['+'] = { 'wl-paste', '--no-newline' },
+				['*'] = { 'wl-paste', '--no-newline' },
 			},
 			cache_enabled = 1,
 		}
