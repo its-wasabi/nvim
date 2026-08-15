@@ -97,8 +97,8 @@
       "src": "https://github.com/qwavies/smart-backspace.nvim"
     },
     "sobsob.nvim": {
-      "rev": "8fc52d044e1ac241e7665d8999df6a39aea0787e",
-      "src": "https://github.com/Fasamii/sobsob.nvim"
+      "rev": "b6410e3fc22bcbfd881ac3d94e7a09d140d963c2",
+      "src": "git:wasabi/sobsob.nvim"
     },
     "stickynote.nvim": {
       "rev": "75ba13d4bf47c2f01ba55ea476dc4b0853469cc2",

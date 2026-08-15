@@ -18,3 +18,16 @@ len
 enum
 const
 consts
+on_edit
+on_move
+TextChange
+usize
+todo
+automerge
+api
+Vec
+impl
+CursorPosition
+Structs
+CRDT
+RemoteCursor

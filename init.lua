@@ -10,7 +10,7 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_gzip = 1
 
 local nvim_font = "Iosevka Code"
-local nvim_font_size = 10
+local nvim_font_size = 11
 if vim.env.TERM == "xterm-kitty" then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		callback = function()

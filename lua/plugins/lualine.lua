@@ -65,10 +65,11 @@ require("lualine").setup({
 				padding = 1,
 				fmt = function(str) return mode_match[str] or string.sub(str, 1, 1); end,
 				on_click = function(_, _, _)
-					print("haiiii :3");
+					print("Hiiii :3");
 				end,
 			},
 		},
+
 		lualine_b = {
 			{
 				"searchcount",
@@ -81,12 +82,19 @@ require("lualine").setup({
 				path = 3,
 				newfile_status = true,
 				file_status = true,
+
+
 				symbols = {
-					unnamed = "[no name]",
-					modified = "󰏫 ",
-					readonly = " ",
-					newfile = "󰐖 ",
+					modified = "%#LualineFilenameSym# %#lualine_b_normal#",
+					readonly = "%#LualineFilenameSym# %#lualine_b_normal#",
 				},
+
+				fmt = function(str)
+					local special_fg = vim.api.nvim_get_hl(0, { name = "Special", link = false }).fg
+					local bg = vim.api.nvim_get_hl(0, { name = "lualine_b_normal", link = false }).bg
+					vim.api.nvim_set_hl(0, "LualineFilenameSym", { fg = special_fg, bg = bg })
+					return str
+				end,
 			},
 		},
 
@@ -101,6 +109,21 @@ require("lualine").setup({
 				},
 				ignore_lsp = { "null-ls" },
 				show_name = true,
+				fmt = function(str)
+					local max_len = 10
+					local result = {}
+
+					for i, name in ipairs(vim.split(str, ',', { plain = true })) do
+						if #name > max_len then
+							name = name:sub(1, max_len - 1) .. "⏵"
+						end
+
+						result[i] = name
+					end
+
+					return table.concat(result, ",")
+				end
+
 			},
 			{
 				"diagnostics",
@@ -129,10 +152,11 @@ require("lualine").setup({
 			},
 			{
 				"branch",
+				icon = "",
 				fmt = function(str)
 					local max_len = 20;
 					if #str > max_len then
-						str = ("%s⏵"):format(str:sub(1, max_len - 1));
+						str = ("%s⏵"):format(str:sub(1, max_len - 1))
 					end
 
 					return str;

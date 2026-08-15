@@ -130,6 +130,20 @@ vim.opt.hlsearch = true;
 -- Scheduled to defer the clipboard provider check and reduce startup time
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus";
+	if vim.fn.executable('wl-copy') == 1 then
+		vim.g.clipboard = {
+			name = 'wl-clipboard',
+			copy = {
+				['+'] = 'wl-copy',
+				['*'] = 'wl-copy',
+			},
+			paste = {
+				['+'] = 'wl-paste',
+				['*'] = 'wl-paste',
+			},
+			cache_enabled = 1,
+		}
+	end
 end)
 
 -- Draws a vertical guideline
