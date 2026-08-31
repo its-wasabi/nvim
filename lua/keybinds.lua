@@ -79,23 +79,6 @@ set("n", "<leader>cd", function()
 	set_pwd_to_git_root()
 end, "set pwd to git root", { silent = false });
 
-
-if vim.g.neovide then
-	local change_scale_factor = function(factor)
-		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * factor
-	end
-
-	set("n", "<C-0>", function()
-		vim.g.neovide_scale_factor = 1.0;
-	end, "reset scale factor (neovide)");
-	set("n", "<C-=>", function()
-		change_scale_factor(1.25)
-	end, "increase scale factor (neovide)");
-	set("n", "<C-->", function()
-		change_scale_factor(1 / 1.25)
-	end, "decrease scale factor (neovide)");
-end
-
 M.blink = {
 	["<C-p>"]     = { "select_prev", "fallback" },
 	["<C-n>"]     = { "select_next", "fallback" },

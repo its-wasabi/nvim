@@ -9,8 +9,10 @@ vim.g.loaded_tarPlugin = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_gzip = 1
 
+local nvim_font_size = 10
 local nvim_font = "Iosevka Code"
-local nvim_font_size = 11
+-- local nvim_font = "Monocraft"
+
 if vim.env.TERM == "xterm-kitty" then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		callback = function()
@@ -101,9 +103,7 @@ require("plugins.treesitter-context")
 
 require("plugins.nvim-web-devicons")
 require("plugins.fidget")
-if not vim.g.neovide then
-	require("plugins.netrw-icons")
-end
+require("plugins.netrw-icons")
 require("plugins.lualine")
 -- require("plugins.indent-blankline")
 

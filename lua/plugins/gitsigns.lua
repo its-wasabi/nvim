@@ -8,7 +8,9 @@ require("gitsigns").setup({
 		changedelete = { text = "" },
 		untracked    = { text = "" },
 	},
-	signs_staged_enable          = true, -- FIX: make it work (for some reason plugin ignores completely hi groups for staged signs)
+
+	-- FIX: make it work (for some reason plugin ignores completely hi groups for staged signs)
+	signs_staged_enable          = true,
 	signs_staged                 = {
 		add          = { text = "" },
 		change       = { text = "" },
