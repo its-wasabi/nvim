@@ -39,10 +39,10 @@ set("n", "<C-s>j", "<C-w>j", "Focus down split");
 set("n", "<C-s>k", "<C-w>k", "Focus up split");
 set("n", "<C-s>p", "<C-w>v", "Split vertical");
 set("n", "<C-s>o", "<C-w>s", "Split horizontal");
-set("n", "<C-s><", smart_resize('h'), "Resize left");
-set("n", "<C-s>>", smart_resize('l'), "Resize right");
+set("n", "<C-s>,", smart_resize('h'), "Resize left");
+set("n", "<C-s>.", smart_resize('l'), "Resize right");
 set("n", "<C-s>-", smart_resize('j'), "Resize down");
-set("n", "<C-s>+", smart_resize('k'), "Resize up");
+set("n", "<C-s>=", smart_resize('k'), "Resize up");
 set("n", "<C-s>r", "<C-w>=", "equalize splits");
 
 set({ "n", "t" }, "<C-t>n", "<cmd>tabnew<CR>", "new tab")

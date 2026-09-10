@@ -42,6 +42,8 @@ vim.opt.cmdheight = 0;
 --	2 - per window
 --	3 - global (neovim only)
 vim.opt.laststatus = 3;
+-- Resizing splits
+vim.opt.equalalways = false;
 
 -- Visually wrap long lines instead of horizontal scrolling
 vim.opt.wrap = true;
@@ -162,7 +164,7 @@ vim.g.netrw_keepdir = 1;
 -- Shell command used to copy directories
 vim.g.netrw_localcopydircmd = "cp -r";
 -- Shell command used to remove directories
-vim.g.netrw_localrmdir = "rm -r";
+vim.g.netrw_localrmdir = "rm";
 -- Directory browsing cache behavior
 -- 0 = no cache, 1 = moderate caching, 2 = aggressive caching
 vim.g.netrw_fastbrowse = 1;

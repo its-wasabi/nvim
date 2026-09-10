@@ -51,3 +51,13 @@ println
 FIXME
 realloc
 Swapchain
+modprobe
+i2c
+hdmi
+dp
+udev
+ddc
+LoadOp
+DONT
+StoreOp
+framebuffer
