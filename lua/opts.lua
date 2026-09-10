@@ -45,6 +45,18 @@ vim.opt.laststatus = 3;
 -- Resizing splits
 vim.opt.equalalways = false;
 
+vim.opt.sessionoptions = {
+	"buffers",
+	"curdir",
+	"tabpages",
+	"winsize",
+	"resize",
+	"help",
+	"globals",
+	"skiprtp",
+	"folds"
+}
+
 -- Visually wrap long lines instead of horizontal scrolling
 vim.opt.wrap = true;
 -- Wrap lines at word boundaries instead of breaking words

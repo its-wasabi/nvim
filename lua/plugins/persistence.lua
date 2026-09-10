@@ -99,7 +99,6 @@ local function session_picker()
 				if selection and selection.value then
 					vim.cmd("silent! only")
 					vim.cmd("source " .. vim.fn.fnameescape(selection.value))
-					vim.cmd("wincmd = ")
 				end
 			end)
 
