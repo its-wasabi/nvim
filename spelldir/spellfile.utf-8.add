@@ -61,3 +61,14 @@ LoadOp
 DONT
 StoreOp
 framebuffer
+autoimport
+insertQualifiedPath
+ide
+bool
+#oosing/!
+u8
+#ackground
+os
+nvim
+wayland
+linux

@@ -89,6 +89,7 @@ M.blink = {
 	["<C-j>"]     = { "scroll_documentation_down", "fallback" },
 }
 
+
 function M.treesitter(select)
 	set({ "x", "o" }, "af", function()
 		select.select_textobject("@function.outer", "textobjects")
@@ -125,7 +126,6 @@ function M.treesitter(select)
 		select.select_textobject("@loop.inner", "textobjects")
 	end, "Select inner loop")
 
-	-- TODO: Find better keymap for that
 	-- set({ "x", "o" }, "ab", function()
 	-- 	select.select_textobject("@block.outer", "textobjects")
 	-- end, "Select outer block")
@@ -133,10 +133,10 @@ function M.treesitter(select)
 	-- 	select.select_textobject("@block.inner", "textobjects")
 	-- end, "Select inner block")
 
-	set({ "x", "o" }, "a/", function()
+	set({ "x", "o" }, "ac", function()
 		select.select_textobject("@comment.outer", "textobjects")
 	end, "Select outer comment")
-	set({ "x", "o" }, "i/", function()
+	set({ "x", "o" }, "ic", function()
 		select.select_textobject("@comment.inner", "textobjects")
 	end, "Select inner comment")
 
@@ -199,16 +199,15 @@ function M.persistence_picker(map, delete_session)
 end
 
 function M.todo_comments()
-	set("n", "<leader>ml", "<cmd>TodoTelescope<cr>", "list all labels");
-	set("n", "<leader>mfl", "<cmd>TodoTelescope keywords=FIX,FIXME,BUG,FIXIT,ISSUE,ERR<cr>", "list all FIXME labels");
-	set("n", "<leader>mtl", "<cmd>TodoTelescope keywords=TODO,LATER<cr>", "list all TODO labels");
-	set("n", "<leader>mwl", "<cmd>TodoTelescope keywords=WARN,WARNING,XXX<cr>", "list all WARN labels");
-	set("n", "<leader>mil", "<cmd>TodoTelescope keywords=NOTE,INFO<cr>", "list all NOTE labels");
-	set("n", "<leader>mol", "<cmd>TodoTelescope keywords=PERF,OPTIM,PERFORMANCE,OPTIMIZE<cr>", "list all PERF labels");
-	set("n", "<leader>mel", "<cmd>TodoTelescope keywords=TEST,TESTING,PASSED,FAILED<cr>", "list all TEST labels");
+	set("n", "<leader>la", "<cmd>TodoTelescope<cr>", "list all labels");
+	set("n", "<leader>li", "<cmd>TodoTelescope keywords=INFO,READ,NOTE<cr>", "list all NOTE labels");
+	set("n", "<leader>lw", "<cmd>TodoTelescope keywords=WARN,TODO,WARNING,XXX,REMOVE<cr>", "list all WARN labels");
+	set("n", "<leader>le", "<cmd>TodoTelescope keywords=ERROR,FIXME,BUG,FIXIT,ISSUE,ERR,FIX<cr>", "list all TEST labels");
+	set("n", "<leader>lp", "<cmd>TodoTelescope keywords=PERF,PERFORMANCE<cr>", "list all PERF labels");
+	set("n", "<leader>lt", "<cmd>TodoTelescope keywords=TODO,TEST,TESTING,PASSED,FAILED<cr>", "list all TODO labels");
 
-	set("n", "<leader>mn", function() require("todo-comments").jump_next() end, "Next label");
-	set("n", "<leader>mp", function() require("todo-comments").jump_prev() end, "Previous label");
+	set("n", "<leader>ln", function() require("todo-comments").jump_next() end, "Next label");
+	set("n", "<leader>lN", function() require("todo-comments").jump_prev() end, "Previous label");
 
 	set("n", "<leader>mfn",
 		function() require("todo-comments").jump_next({ keywords = { "FIX", "FIXME", "BUG", "FIXIT", "ISSUE", "ERR" } }) end,

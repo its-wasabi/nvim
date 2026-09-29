@@ -6,7 +6,7 @@ require("todo-comments").setup({
 		INFO = {
 			signs = false,
 			color = "info",
-			alt = { "READ", "CHECK", "NOTE" },
+			alt = { "READ", "NOTE" },
 		},
 
 		WARN = {

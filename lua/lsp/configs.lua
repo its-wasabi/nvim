@@ -43,9 +43,14 @@ return {
 					experimental = {
 						enable = true,
 					}
+				},
+				completion = {
+					autoimport = {
+						insertQualifiedPath = true,
+					}
 				}
 			}
-		},
+		}
 	},
 
 	glsl_analyzer = {
