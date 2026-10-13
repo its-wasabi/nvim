@@ -73,3 +73,7 @@ nvim
 wayland
 linux
 rust
+Vulkan
+DRM
+devnum
+LSP

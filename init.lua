@@ -64,10 +64,15 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects.git" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
-	-- Styling
-	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
+	-- Utilities
+	{ src = "https://github.com/Fasamii/embed.nvim" },
+	-- UI
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim.git" },
+	-- Styling
+	{ src = "https://github.com/nacro90/numb.nvim" },
+	{ src = "https://github.com/Fasamii/netrw-icons.nvim" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/folke/todo-comments.nvim" },
 	-- Telescope
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
@@ -83,11 +88,6 @@ vim.pack.add({
 	{ src = "https://github.com/bydlw98/blink-cmp-env.git" },
 	{ src = "https://github.com/archie-judd/blink-cmp-words" },
 	{ src = "https://github.com/erooke/blink-cmp-latex.git" },
-	-- Utilities
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/nacro90/numb.nvim" },
-	{ src = "https://github.com/folke/todo-comments.nvim" },
-	{ src = "https://github.com/Fasamii/embed.nvim" },
 	-- Session
 	{ src = "https://github.com/folke/persistence.nvim" },
 	-- Markdown
@@ -104,7 +104,6 @@ require("plugins.nvim-web-devicons")
 require("plugins.fidget")
 require("plugins.netrw-icons")
 require("plugins.lualine")
--- require("plugins.indent-blankline")
 
 require("plugins.telescope")
 

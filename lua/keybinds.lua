@@ -175,10 +175,10 @@ function M.telescope(builtin)
 	set("n", "<leader>ls", builtin.lsp_document_symbols, "LSP document symbols");
 	set("n", "<leader>lS", builtin.lsp_workspace_symbols, "LSP workspace symbols");
 	set("n", "<leader>lw", builtin.lsp_dynamic_workspace_symbols, "LSP dynamic workspace symbols");
-	set("n", "<leader>le", builtin.diagnostics, "LSP diagnostics");
+	set("n", "<leader><C-e>", builtin.diagnostics, "LSP diagnostics");
 end
 
--- TOOD: Unify that into single method
+-- TODO: Unify that into single method
 function M.persistence(persistence, picker)
 	set("n", "<leader>sr", function()
 		persistence.load({ last = true });

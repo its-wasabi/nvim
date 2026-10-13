@@ -47,7 +47,7 @@ for server_name, config in pairs(configs) do
 	config.on_attach = on_attach;
 	-- TODO: Remove cmd = ... When done with rust-analyzer build
 	if server_name == "rust_analyzer" then
-		config.cmd = { "/home/dev/Projects/rust-analyzer/target/release/rust-analyzer" }
+		config.cmd = { "/home/dev/Workspace/Projects/rust-analyzer/target/release/rust-analyzer" }
 	end
 	vim.lsp.config(server_name, config);
 end
