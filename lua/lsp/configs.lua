@@ -47,6 +47,10 @@ return {
 				completion = {
 					autoimport = {
 						insertQualifiedPath = true,
+					},
+
+					fullFunctionSignatures = {
+						enable = true
 					}
 				}
 			}

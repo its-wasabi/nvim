@@ -1,3 +1,12 @@
+local default_document_highlight = vim.lsp.handlers['textDocument/documentHighlight']
+vim.lsp.handlers['textDocument/documentHighlight'] = function(err, result, ctx, config)
+	if not result or #result <= 1 then
+		return
+	else
+		default_document_highlight(err, result, ctx, config)
+	end
+end
+
 local capabilities = vim.lsp.protocol.make_client_capabilities();
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities);
 
