@@ -1,8 +1,5 @@
 return {
 	rust_analyzer = {
-		handlers = {
-			["textDocument/diagnostic"] = function() end,
-		},
 		settings = {
 			["rust-analyzer"] = {
 				checkOnSave = {

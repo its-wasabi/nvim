@@ -56,6 +56,9 @@ require("register-pack-hooks")({
 vim.pack.add({
 	-- Color Theme
 	{ src = "https://github.com/Fasamii/sobsob.nvim" },
+	{ src = "https://github.com/nyoom-engineering/oxocarbon.nvim" },
+	{ src = "https://github.com/maxmx03/fluoromachine.nvim" },
+	{ src = "https://github.com/ramojus/mellifluous.nvim" },
 	-- Icons
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	-- Notifications
