@@ -16,25 +16,7 @@ require("mason").setup({
 });
 
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"typos_lsp",
-		"bashls",
-		"rust_analyzer",
-		"glsl_analyzer",
-		"clangd",
-		"asm_lsp",
-		"ts_ls",
-		"pylsp",
-		"lua_ls",
-		"marksman",
-		"jsonls",
-		"yamlls",
-		"html",
-		"phpactor",
-		"emmet_language_server",
-		"cssls",
-	},
-
+	ensure_installed = vim.tbl_keys(require("lsp.configs")),
 	automatic_installation = true,
 	automatic_enable = true,
 });

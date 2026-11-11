@@ -1,4 +1,4 @@
-vim.opt.updatetime = 50
+vim.opt.updatetime = 200
 
 vim.diagnostic.config({
 	signs = false,

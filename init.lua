@@ -9,25 +9,34 @@ vim.g.loaded_tarPlugin = 1
 vim.g.loaded_zipPlugin = 1
 vim.g.loaded_gzip = 1
 
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_matchit = 1
+
 local nvim_font_size = 10
 local nvim_font = "Iosevka Code"
 -- local nvim_font = "Monocraft"
 
 if vim.env.TERM == "xterm-kitty" then
+	local kitty_group = vim.api.nvim_create_augroup("KittyIPC", { clear = true })
+
 	vim.api.nvim_create_autocmd("VimEnter", {
+		group = kitty_group,
 		callback = function()
-			vim.fn.jobstart({ "kitty", "@", "set-spacing", "padding=0", }, { detach = true })
-			vim.fn.jobstart({ "kitty", "@", "load-config",
-				"-o", ("font_family=" .. tostring(nvim_font)),
-				"-o", ("font_size=" .. tostring(nvim_font_size)),
-			})
+			vim.system({ "kitty", "@", "set-spacing", "padding=0" }, { detach = true })
+			vim.system({
+				"kitty", "@", "load-config",
+				"-o", "font_family=" .. nvim_font,
+				"-o", "font_size=" .. tostring(nvim_font_size),
+			}, { detach = true })
 		end,
 	})
 
 	vim.api.nvim_create_autocmd("VimLeavePre", {
+		group = kitty_group,
 		callback = function()
-			vim.fn.system({ "kitty", "@", "set-spacing", "padding=default", "margin=default", })
-			vim.fn.system({ "kitty", "@", "load-config", "--ignore-overrides" })
+			vim.system({ "kitty", "@", "set-spacing", "padding=default", "margin=default" }, { detach = true })
+			vim.system({ "kitty", "@", "load-config", "--ignore-overrides" }, { detach = true })
 		end,
 	})
 end
@@ -98,7 +107,6 @@ vim.pack.add({
 })
 
 vim.cmd.colorscheme("sobsob")
-vim.notify = require("fidget").notify
 
 require("plugins.treesitter")
 require("plugins.treesitter-context")
@@ -120,9 +128,4 @@ require("plugins.persistence")
 require("plugins.render-markdown");
 
 vim.lsp.log.set_level(vim.log.levels.OFF)
-vim.api.nvim_create_autocmd("FileType", {
-	once = true,
-	callback = function()
-		require("lsp");
-	end,
-});
+require("lsp")

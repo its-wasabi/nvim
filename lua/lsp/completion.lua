@@ -12,7 +12,6 @@ end)()
 local cmp = require("blink.cmp");
 local border = "none";
 
-cmp.build():wait(60000)
 cmp.setup({
 	keymap = require("keybinds").blink,
 
@@ -139,7 +138,8 @@ cmp.setup({
 				name = "blink-cmp-words",
 				module = "blink-cmp-words.thesaurus",
 				min_keyword_length = 4,
-				max_items = 15,
+				max_items = 4,
+				async = true,
 				opts = {
 					score_offset = 0,
 					definition_pointers = { "!", "&", "^" },
@@ -150,7 +150,8 @@ cmp.setup({
 				name = "blink-cmp-words",
 				module = "blink-cmp-words.dictionary",
 				min_keyword_length = 4,
-				max_items = 15,
+				max_items = 4,
+				async = true,
 				opts = {
 					score_offset = 0,
 					definition_pointers = { "!", "&", "^" },

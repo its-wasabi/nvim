@@ -1,8 +1,7 @@
 local telescope = require("telescope")
 telescope.setup({
-	path_display = { "smart" },
-
 	defaults = {
+		path_display = { "full" }, -- path_display = { "smart" },
 		border = true,
 		color_devicons = true,
 		borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
@@ -45,11 +44,11 @@ telescope.setup({
 		file_ignore_patterns = {
 			"^%.git/",
 			"^%.git$",
-			".cache",
-			".lock",
-			"node_modules",
-			"build",
-			"target",
+			"^target/",
+			"^build/",
+			"^node_modules/",
+			"^%.cache/",
+			"%.lock$"
 		},
 	},
 

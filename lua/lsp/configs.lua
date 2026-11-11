@@ -1,4 +1,39 @@
 return {
+	typos_lsp = {},
+	bashls = {},
+	asm_lsp = {},
+	pylsp = {},
+	marksman = {},
+	phpactor = {},
+	emmet_language_server = {},
+	cssls = {},
+
+	-- TODO: Verify if that's correct lsp config entry
+	ts_ls = {
+		settings = {
+			typescript = {
+				inlayHints = {
+					includeInlayParameterNameHints = "all",
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+				}
+			},
+			javascript = {
+				inlayHints = {
+					includeInlayParameterNameHints = "all",
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+				}
+			}
+		}
+	},
+
+
+
 	rust_analyzer = {
 		settings = {
 			["rust-analyzer"] = {
@@ -77,28 +112,6 @@ return {
 		},
 	},
 
-	ts_server = {
-		settings = {
-			typescript = {
-				inlayHints = {
-					includeInlayParameterNameHints = "all",
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayVariableTypeHints = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-				}
-			},
-			javascript = {
-				inlayHints = {
-					includeInlayParameterNameHints = "all",
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayVariableTypeHints = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-				}
-			}
-		}
-	},
 
 	pyright = {
 		settings = {
@@ -120,10 +133,10 @@ return {
 				diagnostics = {
 					globals = { "vim", "Mux" }
 				},
-				workspace = {
-					library = vim.api.nvim_get_runtime_file("", true),
-					checkThirdParty = false,
-				},
+				-- workspace = {
+				-- 	library = vim.api.nvim_get_runtime_file("", true),
+				-- 	checkThirdParty = false,
+				-- },
 				telemetry = { enable = false },
 				hint = {
 					enable = true,

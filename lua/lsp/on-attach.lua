@@ -1,5 +1,4 @@
 return function(client, bufnr)
-	vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 	require("keybinds").lsp_attach(bufnr);
 
 	if client.name == "rust_analyzer" then

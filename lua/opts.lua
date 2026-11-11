@@ -48,13 +48,12 @@ vim.opt.equalalways = false;
 vim.opt.sessionoptions = {
 	"buffers",
 	"curdir",
+	"folds",
+	"help",
 	"tabpages",
 	"winsize",
-	"resize",
-	"help",
-	"globals",
-	"skiprtp",
-	"folds"
+	"terminal",
+	"localoptions",
 }
 
 -- Visually wrap long lines instead of horizontal scrolling
@@ -102,23 +101,13 @@ vim.opt.splitright = true;
 -- Keep screen position on split
 vim.opt.splitkeep = "screen";
 
-local backup_dir = os.getenv("HOME") .. "/.local/share/nvim/backup";
-vim.fn.mkdir(backup_dir .. "/undo", "p");
-vim.fn.mkdir(backup_dir .. "/backup", "p");
-vim.fn.mkdir(backup_dir .. "/swap", "p");
-
--- Directory for persistent undo files
-vim.opt.undodir = backup_dir .. "/undo";
 -- Enables persistent undo across sessions
 vim.opt.undofile = true;
--- Directory for backup files (~).
-vim.opt.backupdir = backup_dir .. "/backup";
+-- Enables backup file creation before overwriting
+vim.opt.backup = false;
+vim.opt.writebackup = true
 -- Skip backup creation for
 vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" };
--- Enables backup file creation before overwriting
-vim.opt.backup = true;
--- Directory for swap files
-vim.opt.directory = backup_dir .. "/swap";
 -- Enables swap files for crash recovery and file-lock detection
 vim.opt.swapfile = true;
 
@@ -128,6 +117,7 @@ vim.fn.mkdir(spell_dir, "p");
 vim.opt.spellfile = spell_dir .. "/spellfile.utf-8.add";
 -- Spell checking
 vim.opt.spell = true;
+vim.opt.spelloptions = "camel"
 -- Spell checking language
 vim.opt.spelllang = "en_us";
 
@@ -177,16 +167,13 @@ vim.g.netrw_keepdir = 1;
 vim.g.netrw_localcopydircmd = "cp -r";
 -- Shell command used to remove directories
 vim.g.netrw_localrmdir = "rm";
--- Directory browsing cache behavior
--- 0 = no cache, 1 = moderate caching, 2 = aggressive caching
-vim.g.netrw_fastbrowse = 1;
 -- Open vertical splits to the right when pressing 'v' in netrw (mirrors split right)
 vim.g.netrw_altv = 1;
 -- netrw window size as a percentage of the screen width
 vim.g.netrw_winsize = 12;
 -- Fast browsing retains old directory listing:
 -- 0 = no cache, 1 = only remote, 2 = cache everything
-vim.g.netrw_fastbrowse = 0;
+vim.g.netrw_fastbrowse = 1;
 -- Which files to hide while browsing
 -- 0 = show all,1 = show not-hidden files, 2 = show hidden files only
 vim.g.netrw_hide = 0;
@@ -204,7 +191,3 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" };
 --          /N = save N lines of search history, @N = save N lines of input history,
 --          h  = don't restore hlsearch state on startup
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h";
-
-
--- auto-session
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
